@@ -1,4 +1,4 @@
-package com.accp.action.ljw;
+package com.accp.action.mjw;
 
 public class LjwAction {
 

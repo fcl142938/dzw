@@ -1,4 +1,4 @@
-package com.accp.biz.ljw;
+package com.accp.dao.mjw;
 
 public class LjwBiz {
 
