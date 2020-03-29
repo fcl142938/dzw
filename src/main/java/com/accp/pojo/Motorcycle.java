@@ -8,8 +8,19 @@ public class Motorcycle {
     private String motorcyclename;
 
     private Long motorcycleprice;
+    
+    private Integer brandid;
+    
 
-    public Integer getMotorcycleid() {
+    public Integer getBrandid() {
+		return brandid;
+	}
+
+	public void setBrandid(Integer brandid) {
+		this.brandid = brandid;
+	}
+
+	public Integer getMotorcycleid() {
         return motorcycleid;
     }
 

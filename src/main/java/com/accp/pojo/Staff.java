@@ -2,7 +2,11 @@ package com.accp.pojo;
 
 import java.util.Date;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 public class Staff {
+	@TableId(type = IdType.AUTO,value = "staffid")
     private Integer staffid;
 
     private Integer departmentid;

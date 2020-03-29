@@ -1,6 +1,11 @@
 package com.accp.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 public class Grade {
+	
+	@TableId(type = IdType.AUTO,value = "gradeid")
     private Integer gradeid;
 
     private String gradename;

@@ -1,6 +1,11 @@
 package com.accp.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 public class Power {
+	
+	@TableId(type = IdType.AUTO,value = "powerid")
     private Integer powerid;
 
     private String powername;

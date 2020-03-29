@@ -1,6 +1,11 @@
 package com.accp.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 public class Artificergrade {
+	
+	@TableId(type = IdType.AUTO,value = "agid")
     private Integer agid;
 
     private String agname;

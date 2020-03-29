@@ -1,6 +1,11 @@
 package com.accp.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 public class Typeinfo {
+	
+	@TableId(type = IdType.AUTO,value = "infoid")
     private Integer infoid;
 
     private Integer typeid;
