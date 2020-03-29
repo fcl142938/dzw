@@ -1,5 +1,5 @@
 package com.accp.vo.lyf;
 
-public class LyfBIz {
+public class Lyf {
 
 }

@@ -1,5 +1,5 @@
 package com.accp.vo.px;
 
-public class PxBiz {
+public class PX {
 
 }

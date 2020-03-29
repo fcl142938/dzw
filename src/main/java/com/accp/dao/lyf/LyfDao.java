@@ -1,5 +1,5 @@
 package com.accp.dao.lyf;
 
-public class LyfBIz {
+public interface LyfDao {
 
 }

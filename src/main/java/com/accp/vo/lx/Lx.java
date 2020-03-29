@@ -1,5 +1,5 @@
 package com.accp.vo.lx;
 
-public class LxBIz {
+public class Lx {
 
 }

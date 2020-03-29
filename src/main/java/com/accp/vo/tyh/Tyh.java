@@ -1,5 +1,5 @@
 package com.accp.vo.tyh;
 
-public class TyhBiz {
+public class Tyh {
 
 }
