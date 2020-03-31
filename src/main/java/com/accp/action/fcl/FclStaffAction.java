@@ -29,15 +29,35 @@ public class FclStaffAction {
 	 */
 	@GetMapping("login/{staffname}/{staffpwd}")
 	public  Map<String, Object> login(@PathVariable String staffname,@PathVariable String staffpwd,HttpSession session) {
-		FclStaffVo staff=biz.login(staffname,staffpwd);
+		FclStaffVo stfvo=biz.login(staffname,staffpwd);
 		Map<String, Object> map= new HashMap<String, Object>();
-		if(staff!=null) {
-			session.setAttribute("staff", staff);
+		if(stfvo!=null) {
+			session.setAttribute("stfvo", stfvo);
 			map.put("state", 200);
-			map.put("staff", staff);
+			map.put("staff", stfvo);
 		}else {
 			map.put("state", 400);
 		}
 		return map;
+	}
+	
+	/**
+	 * 获取权限
+	 * @param session
+	 * @return
+	 */
+	@GetMapping("power")
+	public FclStaffVo  getPower(HttpSession session) {
+		return (FclStaffVo)session.getAttribute("stfvo");
+	}
+	
+	/**
+	 * 退出
+	 * @param session
+	 */
+	@GetMapping("extis")
+	public String  extis(HttpSession session) {
+		session.removeAttribute("stfvo");
+		return "ok";
 	}
 }

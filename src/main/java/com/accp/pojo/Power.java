@@ -45,4 +45,16 @@ public class Power {
     public void setPowersrc(String powersrc) {
         this.powersrc = powersrc == null ? null : powersrc.trim();
     }
+    public Power() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Power(Integer powerid, String powername, Integer powerparent, String powersrc) {
+		super();
+		this.powerid = powerid;
+		this.powername = powername;
+		this.powerparent = powerparent;
+		this.powersrc = powersrc;
+	}
+    
 }
