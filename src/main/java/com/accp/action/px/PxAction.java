@@ -19,7 +19,7 @@ public class PxAction {
 	
 	@GetMapping("{staffname}")
 	private List<PX> queryall(@PathVariable String staffname){
-		
+		System.out.println(staffname);
 		if("null".equals(staffname)) {
 			staffname=null;
 		}
