@@ -40,4 +40,24 @@ public class FclStaffAction {
 		}
 		return map;
 	}
+	
+	/**
+	 * 获取权限
+	 * @param session
+	 * @return
+	 */
+	@GetMapping("power")
+	public FclStaffVo  getPower(HttpSession session) {
+		return (FclStaffVo)session.getAttribute("stfvo");
+	}
+	
+	/**
+	 * 退出
+	 * @param session
+	 */
+	@GetMapping("extis")
+	public String  extis(HttpSession session) {
+		session.removeAttribute("stfvo");
+		return "ok";
+	}
 }
