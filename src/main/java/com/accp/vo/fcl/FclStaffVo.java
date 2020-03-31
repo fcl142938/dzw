@@ -9,7 +9,7 @@ import com.accp.pojo.Staff;
 public class FclStaffVo {
 	private Staff stf;
 	
-	private List<Power>  list= new ArrayList<Power>(0);
+	private List<FclPowerVo>  list= new ArrayList<FclPowerVo>(0);
 	
 	
 
@@ -21,11 +21,11 @@ public class FclStaffVo {
 		this.stf = stf;
 	}
 
-	public List<Power> getList() {
+	public List<FclPowerVo> getList() {
 		return list;
 	}
 
-	public void setList(List<Power> list) {
+	public void setList(List<FclPowerVo> list) {
 		this.list = list;
 	}
 	
