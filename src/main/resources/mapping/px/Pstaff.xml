@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.dao.px.PxDao">
+   <select id="queryall" resultType="com.accp.vo.px.PX">
+      SELECT  s.`staffid`,d.`departmentname`,p.`positionname`,
+s.`staffname`,s.`staffsex`,s.`saddress`,s.`sstarttime`,s.`staffaccount`,s.`price` 
+FROM `department` AS d,`position` AS p,`staff` AS s
+<where>
+  d.`departmentid`=p.`departmentid` AND s.`positionid`=p.`positionid`
+   <if test="staffname!=null">
+   and   `staffname` like '%${staffname}%'
+</if>  
+</where>
+
+ 
+      
+   </select>
+
+
+</mapper>
