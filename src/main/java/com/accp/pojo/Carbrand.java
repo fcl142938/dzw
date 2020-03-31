@@ -3,7 +3,6 @@ package com.accp.pojo;
 public class Carbrand {
     private Integer brandid;
 
-    private Integer motorcycleid;
 
     private String brandname;
 
@@ -15,14 +14,6 @@ public class Carbrand {
 
     public void setBrandid(Integer brandid) {
         this.brandid = brandid;
-    }
-
-    public Integer getMotorcycleid() {
-        return motorcycleid;
-    }
-
-    public void setMotorcycleid(Integer motorcycleid) {
-        this.motorcycleid = motorcycleid;
     }
 
     public String getBrandname() {

@@ -1,6 +1,11 @@
 package com.accp.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 public class Position {
+	
+	@TableId(type = IdType.AUTO,value = "positionid")
     private Integer positionid;
 
     private Integer departmentid;

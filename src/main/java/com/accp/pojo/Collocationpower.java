@@ -1,6 +1,12 @@
 package com.accp.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 public class Collocationpower {
+	
+	
+	@TableId(type = IdType.AUTO,value = "cid")
     private Integer cid;
 
     private Integer powerid;

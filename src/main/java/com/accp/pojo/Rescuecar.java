@@ -1,6 +1,11 @@
 package com.accp.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 public class Rescuecar {
+	
+	@TableId(type = IdType.AUTO,value = "rescueid")
     private Integer rescueid;
 
     private String rescuenumber;

@@ -2,7 +2,14 @@ package com.accp.pojo;
 
 import java.util.Date;
 
-public class Artificer {
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
+@TableName("Artificer")
+public class  Artificer{
+	
+	@TableId(type = IdType.AUTO,value = "aid")
     private Integer aid;
 
     private Integer positionid;

@@ -1,6 +1,11 @@
 package com.accp.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 public class Consumerinfo {
+	
+	@TableId(type = IdType.AUTO,value = "userid")
     private Integer userid;
 
     private String username;

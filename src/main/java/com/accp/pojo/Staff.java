@@ -2,10 +2,13 @@ package com.accp.pojo;
 
 import java.util.Date;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 public class Staff {
+	@TableId(type = IdType.AUTO,value = "staffid")
     private Integer staffid;
 
-    private Integer departmentid;
 
     private String staffname;
 
@@ -26,8 +29,19 @@ public class Staff {
     private String idcd;
 
     private Integer state;
+    
+    private Integer positionid;
+    
 
-    public Integer getStaffid() {
+    public Integer getPositionid() {
+		return positionid;
+	}
+
+	public void setPositionid(Integer positionid) {
+		this.positionid = positionid;
+	}
+
+	public Integer getStaffid() {
         return staffid;
     }
 
@@ -35,13 +49,6 @@ public class Staff {
         this.staffid = staffid;
     }
 
-    public Integer getDepartmentid() {
-        return departmentid;
-    }
-
-    public void setDepartmentid(Integer departmentid) {
-        this.departmentid = departmentid;
-    }
 
     public String getStaffname() {
         return staffname;

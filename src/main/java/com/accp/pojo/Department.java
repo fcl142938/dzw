@@ -1,6 +1,10 @@
 package com.accp.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 public class Department {
+	@TableId(type = IdType.AUTO,value = "departmentid")
     private Integer departmentid;
 
     private String departmentname;

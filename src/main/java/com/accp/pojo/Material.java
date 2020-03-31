@@ -1,6 +1,11 @@
 package com.accp.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 public class Material {
+	
+	@TableId(type = IdType.AUTO,value = "materialid")
     private Integer materialid;
 
     private String mlname;

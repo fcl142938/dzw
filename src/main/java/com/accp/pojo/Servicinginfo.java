@@ -1,6 +1,10 @@
 package com.accp.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 public class Servicinginfo {
+	@TableId(type = IdType.AUTO,value = "siid")
     private Integer siid;
 
     private String smid;

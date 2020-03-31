@@ -1,6 +1,14 @@
 package com.accp.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
+
+@TableName("Addressinfo")
 public class Addressinfo {
+	
+	@TableId(type = IdType.AUTO,value = "id")
     private Integer id;
 
     private Integer provinceid;
