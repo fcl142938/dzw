@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 
 public class Consumerinfo {
 	
-	@TableId(type = IdType.AUTO,value = "userid")
-    private Integer userid;
+	
+    private String userid;
 
     private String username;
 
@@ -18,12 +18,12 @@ public class Consumerinfo {
 
     private String userremark;
 
-    public Integer getUserid() {
+    public String getUserid() {
         return userid;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setUserid(String userid) {
+        this.userid = userid == null ? null : userid.trim();
     }
 
     public String getUsername() {
