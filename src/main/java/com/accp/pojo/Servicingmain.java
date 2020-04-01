@@ -16,7 +16,7 @@ public class Servicingmain {
 
     private Integer mid;
 
-    private String consumerid;
+    private Integer consumerid;
 
     private Integer rescueid;
 
@@ -72,12 +72,12 @@ public class Servicingmain {
         this.mid = mid;
     }
 
-    public String getConsumerid() {
+    public Integer getConsumerid() {
         return consumerid;
     }
 
-    public void setConsumerid(String consumerid) {
-        this.consumerid = consumerid == null ? null : consumerid.trim();
+    public void setConsumerid(Integer consumerid) {
+        this.consumerid = consumerid ;
     }
 
     public Integer getRescueid() {

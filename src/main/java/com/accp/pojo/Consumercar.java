@@ -2,10 +2,15 @@ package com.accp.pojo;
 
 import java.util.Date;
 
-public class Consumercar {
-    private String consumerid;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 
-    private Integer userid;
+public class Consumercar {
+	
+	@TableId(type = IdType.AUTO,value = "consumerid")
+    private Integer consumerid;
+
+    private String userid;
 
     private Integer motorcycleid;
 
@@ -23,20 +28,20 @@ public class Consumercar {
 
     private Date buycar;
 
-    public String getConsumerid() {
+    public Integer getConsumerid() {
         return consumerid;
     }
 
-    public void setConsumerid(String consumerid) {
-        this.consumerid = consumerid == null ? null : consumerid.trim();
+    public void setConsumerid(Integer consumerid) {
+        this.consumerid = consumerid;
     }
 
-    public Integer getUserid() {
+    public String getUserid() {
         return userid;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setUserid(String userid) {
+        this.userid = userid == null ? null : userid.trim();
     }
 
     public Integer getMotorcycleid() {
