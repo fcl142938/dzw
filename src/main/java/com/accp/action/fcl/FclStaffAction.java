@@ -1,6 +1,7 @@
 package com.accp.action.fcl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accp.biz.fcl.FclStaffBiz;
+import com.accp.vo.fcl.FclPowerVo;
 import com.accp.vo.fcl.FclStaffVo;
 
 @RestController
@@ -59,5 +61,19 @@ public class FclStaffAction {
 	public String  extis(HttpSession session) {
 		session.removeAttribute("stfvo");
 		return "ok";
+	}
+	
+	/**
+	 * 获取所有权限
+	 * @return
+	 */
+	@GetMapping("power/powerGet")
+	public  List<FclPowerVo> powerGet(){
+		return biz.powerGet();
+	}
+	
+	@GetMapping("power/{positionid}")
+	public  List<Integer> poweridGet(@PathVariable Integer positionid){
+		return biz.poweridGet(positionid);
 	}
 }

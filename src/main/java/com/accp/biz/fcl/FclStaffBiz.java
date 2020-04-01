@@ -63,6 +63,32 @@ public class FclStaffBiz {
 		
 	}
 	
+	/***
+	 * 获取所有权限
+	 * @return
+	 */
+	public  List<FclPowerVo> powerGet(){
+		//查询中间表	重新组织成一个list集合
+		List<Integer> list=pdao.selectList(null).stream().map(Power::getPowerid).collect(Collectors.toList());
+		List<FclPowerVo> listvo= new ArrayList<FclPowerVo>();
+		pdao.selectList(new QueryWrapper<Power>().lambda().in(Power::getPowerid,list)).forEach(temp->{
+			//循环生成一级节点
+			if(temp.getPowerparent()==0) {
+				listvo.add(changeTree(temp,list));
+			}		
+		});
+		return listvo;
+	}
+	
+	/**
+	 * 获取职位权限id
+	 * @param positionid
+	 * @return
+	 */
+	public  List<Integer> poweridGet(Integer positionid){
+		QueryWrapper<Collocationpower> qw=Wrappers.query();
+		return cdao.selectList(qw.eq("positionid", positionid)).stream().map(Collocationpower::getPowerid).collect(Collectors.toList());
+	}
 	
 	/**
 	 * 递归查询上级,生成节点树，字节点生成
