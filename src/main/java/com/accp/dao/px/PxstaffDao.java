@@ -1,11 +1,9 @@
 package com.accp.dao.px;
 
-import java.util.List;
-
 import com.accp.pojo.Department;
+import com.accp.pojo.Staff;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-public interface PxdepartmentDao extends BaseMapper<Department> {
-	
+public interface PxstaffDao extends BaseMapper<Staff>{
 
 }
