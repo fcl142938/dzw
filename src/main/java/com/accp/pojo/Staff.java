@@ -2,6 +2,7 @@ package com.accp.pojo;
 
 import java.util.Date;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 
@@ -19,9 +20,9 @@ public class Staff {
     private String staffpwd;
 
     private String saddress;
-
+    @JSONField(format = "yyyy-MM-dd")
     private Date sstarttime;
-
+    @JSONField(format = "yyyy-MM-dd")
     private Date sendtime;
 
     private Long price;
