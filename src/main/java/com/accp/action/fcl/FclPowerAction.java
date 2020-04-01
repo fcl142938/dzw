@@ -21,6 +21,7 @@ public class FclPowerAction {
 	@PostMapping("modifyPower")//Integer positionid,
 	public  String modifyPower(@RequestBody List<String> list) {
 		System.out.println(list);
+		System.out.println("");
 		//biz.modifyPower(positionid, list);
 		return "ok";
 	}
