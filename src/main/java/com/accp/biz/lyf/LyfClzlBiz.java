@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.accp.dao.lyf.LyfClzlDao;
 import com.accp.pojo.Consumercar;
+import com.accp.vo.lyf.LyfClzlVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 
@@ -18,9 +19,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 public class LyfClzlBiz {
 	@Autowired
 	private LyfClzlDao lyfclzldao;
-	public List<Consumercar> clzl(String userid) {
-		QueryWrapper<Consumercar> qw=Wrappers.query();
-		qw.eq("userid", userid);
-		return lyfclzldao.selectList(qw);
+	public List<LyfClzlVo> clzl(String userid) {
+		return lyfclzldao.clzl(userid);
 	}
 }

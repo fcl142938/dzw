@@ -12,6 +12,7 @@ import com.accp.biz.lyf.LyfClzlBiz;
 import com.accp.biz.lyf.LyfKhzlBiz;
 import com.accp.pojo.Consumercar;
 import com.accp.pojo.Consumerinfo;
+import com.accp.vo.lyf.LyfClzlVo;
 
 @RestController
 @RequestMapping("/api/LyfKhzlAction")
@@ -25,7 +26,7 @@ public class LyfAction {
 		return lyfkhzlbiz.khzl();
 	}
 	@GetMapping("xuanzhongconsumerinfochache/{userid}")
-	public List<Consumercar> clzl(@PathVariable String userid) {
+	public List<LyfClzlVo> clzl(@PathVariable String userid) {
 		return lyfclzlbiz.clzl(userid);
 	}
 }
