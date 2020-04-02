@@ -48,14 +48,16 @@ public class FclStaffBiz {
 			QueryWrapper<Collocationpower> qw1=Wrappers.query();
 			//查询中间表	重新组织成一个list集合
 			List<Integer> list=cdao.selectList(qw1.eq("positionid", svo.getStf().getPositionid())).stream().map(Collocationpower::getPowerid).collect(Collectors.toList());
-			List<FclPowerVo> listvo= new ArrayList<FclPowerVo>();
-			pdao.selectList(new QueryWrapper<Power>().lambda().in(Power::getPowerid,list)).forEach(temp->{
-				//循环生成一级节点
-				if(temp.getPowerparent()==0) {
-					listvo.add(changeTree(temp,list));
-				}		
-			});
-			svo.setList(listvo);
+			if(list!=null&&list.size()!=0) {
+				List<FclPowerVo> listvo= new ArrayList<FclPowerVo>();
+				pdao.selectList(new QueryWrapper<Power>().lambda().in(Power::getPowerid,list)).forEach(temp->{
+					//循环生成一级节点
+					if(temp.getPowerparent()==0) {
+						listvo.add(changeTree(temp,list));
+					}		
+				});
+				svo.setList(listvo);
+			}		
 			 return svo;
 		}else {
 			return null;

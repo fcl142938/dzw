@@ -36,4 +36,14 @@ public class Collocationpower {
     public void setPositionid(Integer positionid) {
         this.positionid = positionid;
     }
+    public Collocationpower() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Collocationpower(Integer powerid, Integer positionid) {
+		super();
+		this.powerid = powerid;
+		this.positionid = positionid;
+	}
+    
 }

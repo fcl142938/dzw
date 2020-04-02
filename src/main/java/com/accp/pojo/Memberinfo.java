@@ -23,8 +23,19 @@ public class Memberinfo {
     private Long makemoney;
 
     private Integer state;
+    
+    private String  smid;
+    
 
-    public Integer getMid() {
+    public String getSmid() {
+		return smid;
+	}
+
+	public void setSmid(String smid) {
+		this.smid = smid;
+	}
+
+	public Integer getMid() {
         return mid;
     }
 

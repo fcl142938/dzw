@@ -10,11 +10,9 @@ public class Servicingmain {
 
     private Integer gid;
 
-    private Integer userid;
 
     private Integer staffid;
 
-    private Integer mid;
 
     private Integer consumerid;
 
@@ -48,14 +46,7 @@ public class Servicingmain {
         this.gid = gid;
     }
 
-    public Integer getUserid() {
-        return userid;
-    }
-
-    public void setUserid(Integer userid) {
-        this.userid = userid;
-    }
-
+  
     public Integer getStaffid() {
         return staffid;
     }
@@ -64,13 +55,6 @@ public class Servicingmain {
         this.staffid = staffid;
     }
 
-    public Integer getMid() {
-        return mid;
-    }
-
-    public void setMid(Integer mid) {
-        this.mid = mid;
-    }
 
     public Integer getConsumerid() {
         return consumerid;
