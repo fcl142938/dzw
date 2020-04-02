@@ -50,7 +50,7 @@ public class WeiXiuAction {
 	@PutMapping("pingpai")
 	public int selectList(@RequestBody Typeinfo t) {
 		System.out.println("add");
-		return ibiz.updateById(t);
+		return ibiz.updateById(t);   
 	}
 	
 	/**

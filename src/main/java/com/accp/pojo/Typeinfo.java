@@ -18,7 +18,7 @@ public class Typeinfo {
 
     public Integer getInfoid() {
         return infoid;
-    }
+    } 
 
     public void setInfoid(Integer infoid) {
         this.infoid = infoid;

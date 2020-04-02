@@ -53,7 +53,7 @@ public class TypeInfoBiz {
 		
 		
 		
-		 
+		  
 		return dao.insert(t);
 	}
 	

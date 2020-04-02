@@ -27,7 +27,7 @@ public class TypeBiz {
 		List<TypeVo> list =  new ArrayList<TypeVo>();
 		dao.selectList(qw).forEach(val ->{
 			TypeVo tvo = new TypeVo();
-			tvo.setTypeid(val.getTypeid());
+			tvo.setTypeid(val.getTypeid()); 
 			tvo.setTypename(val.getTypename());
 			tvo.setTypeparent(val.getTypeparent());
 			QueryWrapper<Type> qw2 = Wrappers.query();

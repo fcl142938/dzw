@@ -32,7 +32,7 @@ public class TypeVo {
 	    public String getTypename() {
 	        return typename;
 	    }
-
+ 
 	    public void setTypename(String typename) {
 	        this.typename = typename == null ? null : typename.trim();
 	    }
