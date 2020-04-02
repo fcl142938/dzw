@@ -18,6 +18,7 @@ import com.accp.biz.px.PxBiz;
 import com.accp.pojo.Department;
 import com.accp.pojo.Staff;
 import com.accp.vo.px.PX;
+import com.accp.vo.px.Pxdep;
 
 @RestController
 @RequestMapping("px/api/user")
@@ -73,6 +74,43 @@ public class PxAction {
 			 message.put("msg", "ok");
 			 return message;
 		}
+	 //部门新增
+	 @PostMapping("adddepment")
+	 public Map<String, String> adddeps(@RequestBody Department d) {
+		 pbiz.adddeps(d);
+		 Map<String, String> message = new HashMap<String, String>();
+		 message.put("code", "200");
+		 message.put("msg", "ok");
+		 return message;
+	 }
+	 //部门删除
+	 @DeleteMapping("deletedepss/{departmentid}")
+	 public Map<String, String> deletedeps(@PathVariable Integer departmentid) {
+		 System.out.println(departmentid);
+		 pbiz.deletedeps(departmentid);
+		 Map<String, String> message = new HashMap<String, String>();
+		 message.put("code", "200");
+		 message.put("msg", "ok");
+		 return message;
+	 }
+	 //根据Id查询部门
+	 @GetMapping("depment/{departmentid}")
+	 public Department querybyid(@PathVariable  Integer departmentid) {
+			return pbiz.querybyid(departmentid);
+		}
+	 
+	 //修改部门名称
+	
+	  @PutMapping("modifdep") 
+	public Map<String, String> updatedeps(@RequestBody Department d) {
+			  pbiz.updatedeps(d);
+			  Map<String, String> message = new HashMap<String, String>();
+				 message.put("code", "200");
+				 message.put("msg", "ok");
+				 return message;
+	  
+	}
+	 
 	 
 
 }
