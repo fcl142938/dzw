@@ -10,8 +10,37 @@ public class Servicinginfo {
     private String smid;
 
     private Integer infoid;
+    
+    private String infoname;
+    private Double price;
+    private String infomark;
+    
 
-    public Integer getSiid() {
+    public String getInfoname() {
+		return infoname;
+	}
+
+	public void setInfoname(String infoname) {
+		this.infoname = infoname;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public String getInfomark() {
+		return infomark;
+	}
+
+	public void setInfomark(String infomark) {
+		this.infomark = infomark;
+	}
+
+	public Integer getSiid() {
         return siid;
     }
 
