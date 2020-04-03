@@ -19,4 +19,10 @@ public class LyfKhzlBiz {
 	public List<Consumerinfo> khzl() {
 		return lyfkhzldao.selectList(null);
 	}
+	public int addkehu(Consumerinfo kehu) {
+		return lyfkhzldao.insert(kehu);
+	}
+	public int xiugaikehu(Consumerinfo kehu) {
+		return lyfkhzldao.updateById(kehu);
+	}
 }

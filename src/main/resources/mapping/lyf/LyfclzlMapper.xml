@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.accp.dao.lyf.LyfClzlDao" >
   <select id="clzl" resultType="com.accp.vo.lyf.LyfClzlVo">
-  	SELECT che.`carnumber`,pinpai.`brandname`,chexing.`motorcyclename`,che.`drivername`,che.`driverphone`,che.`driverbrithday`,fadongji.`motorletter`,fadongji.`motorname` FROM `consumercar` AS che,`carbrand` AS pinpai,`motorbrand` AS fadongji,`motorcycle` AS chexing
+  	SELECT che.`consumerid`,che.`carnumber`,pinpai.`brandname`,chexing.`motorcyclename`,che.`drivername`,che.`driverphone`,che.`driverbrithday`,fadongji.`motorletter`,fadongji.`motorname` FROM `consumercar` AS che,`carbrand` AS pinpai,`motorbrand` AS fadongji,`motorcycle` AS chexing
 	WHERE che.`motorcycleid`=chexing.`motorcycleid` AND chexing.`brandid`=pinpai.`brandid` AND chexing.`motorid`=fadongji.`motorid` AND che.`userid`=#{userid}
   </select>
 </mapper>
