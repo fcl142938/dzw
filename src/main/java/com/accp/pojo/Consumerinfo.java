@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 
 public class Consumerinfo {
 	
-	
+	@TableId(value = "userid")
     private String userid;
 
     private String username;

@@ -1,10 +1,14 @@
 package com.accp.action.lyf;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -60,5 +64,58 @@ public class LyfAction {
 	@GetMapping("chexing/{id}")
 	public List<Motorcycle> chexing(@PathVariable String id) {
 		return lyfchexingbiz.chexing(id);
+	}
+	@PostMapping("addkehu")
+	public Map<String, Object> addkehu(@RequestBody Consumerinfo kehu) {
+		System.out.println(kehu.getUserid());
+		Map<String, Object> message = new HashMap<String, Object>();
+		int count=lyfkhzlbiz.addkehu(kehu);
+		if(count>0) {
+			message.put("code", "200");
+			message.put("msg", "新增成功");
+		}else {
+			message.put("code", "300");
+			message.put("msg", "新增失败");
+		}
+		return message;
+	}
+	@PostMapping("addkehuche")
+	public Map<String, Object> addkehuche(@RequestBody Consumercar kehuche) {
+		Map<String, Object> message = new HashMap<String, Object>();
+		int count1=lyfclzlbiz.addkehuche(kehuche);
+		if(count1>0) {
+			message.put("code", "200");
+			message.put("msg", "新增成功");
+		}else {
+			message.put("code", "300");
+			message.put("msg", "新增失败");
+		}
+		return message;
+	}
+	@PostMapping("xiugaikehu")
+	public Map<String, Object> xiugaikehu(@RequestBody Consumerinfo kehu) {
+		Map<String, Object> message = new HashMap<String, Object>();
+		int count=lyfkhzlbiz.xiugaikehu(kehu);
+		if(count>0) {
+			message.put("code", "200");
+			message.put("msg", "修改成功");
+		}else {
+			message.put("code", "300");
+			message.put("msg", "修改失败");
+		}
+		return message;
+	}
+	@PostMapping("xiugaikehuche")
+	public Map<String, Object> xiugaikehuche(@RequestBody Consumercar kehuche) {
+		Map<String, Object> message = new HashMap<String, Object>();
+		int count1=lyfclzlbiz.xiugaikehuche(kehuche);
+		if(count1>0) {
+			message.put("code", "200");
+			message.put("msg", "修改成功");
+		}else {
+			message.put("code", "300");
+			message.put("msg", "修改失败");
+		}
+		return message;
 	}
 }
