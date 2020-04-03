@@ -13,8 +13,19 @@ public class Rescuecar {
     private String renumber;
 
     private Integer state;
+    
+    private Double price;
+    
 
-    public Integer getRescueid() {
+    public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public Integer getRescueid() {
         return rescueid;
     }
 

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accp.biz.fcl.FclServicingmainBiz;
+import com.accp.vo.fcl.FclSerAllVo;
 import com.accp.vo.fcl.FclServicingmainVo;
 import com.github.pagehelper.PageInfo;
 
@@ -21,5 +22,14 @@ public class FclServicingmainAction {
 	@GetMapping("queryPage/{currentPage}/{pageSize}/{state}")
 	public PageInfo<FclServicingmainVo> queryPage(@PathVariable Integer currentPage,@PathVariable Integer pageSize, @PathVariable Integer state ){
 		return biz.queryPage(state, currentPage, pageSize);
+	}
+	
+	/**
+	 * 页面初始数据
+	 * @return
+	 */
+	@GetMapping("queryRescuecar")
+	public FclSerAllVo queryRescuecar() {
+		return biz.queryRescuecar();
 	}
 }

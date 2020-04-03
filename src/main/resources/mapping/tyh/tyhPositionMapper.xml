@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.accp.dao.tyh.tyhIpositionDAO">
+
+	<!-- 删除岗位 -->
+	<delete id="tyhDelPositionById">
+		delete from Position
+		where positionid = #{positionid}
+	</delete>
+
+	<!-- 修改岗位 -->
+	<update id="tyhUpdateByPosition">
+		update Position set positionname = #{p.positionname},departmentid = #{p.departmentid}
+		where positionid = #{p.positionid}
+	</update>
+
+	<!-- 新增岗位 -->
+	<insert id="tyhinsertByPosition">
+		insert into Position
+		Value(#{p.positionid},#{p.departmentid},#{p.positionname})
+	</insert>
+
+	<!-- 根据岗位ID查询岗位ID是否存在  -->
+	<select id="tyhQueryByPositionId" resultType="Position">
+		select * from Position
+		where positionid = #{positionid}
+	</select>
+
+	<!-- 查询所有岗位  -->
+	<select id="tyhQueryByPositionAll" resultType="PositionAndDepartment">
+		SELECT `positionid`,p.`departmentid`,`positionname`,`departmentname` FROM POSITION AS p
+		INNER JOIN `department` AS d
+		ON p.`departmentid` = d.`departmentid`
+	</select>
+
+	
+</mapper>

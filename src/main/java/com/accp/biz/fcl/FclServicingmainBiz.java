@@ -11,13 +11,18 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.accp.dao.fcl.FclArtificergrowDao;
 import com.accp.dao.fcl.FclConsumercarDao;
+import com.accp.dao.fcl.FclRescuecarDao;
 import com.accp.dao.fcl.FclServicinginfoDao;
 import com.accp.dao.fcl.FclServicingmainDao;
 import com.accp.dao.fcl.FclTypeinfoDao;
 import com.accp.pojo.Servicingmain;
 import com.accp.pojo.Typeinfo;
+import com.accp.pojo.Artificergrow;
+import com.accp.pojo.Rescuecar;
 import com.accp.pojo.Servicinginfo;
+import com.accp.vo.fcl.FclSerAllVo;
 import com.accp.vo.fcl.FclServicingmainVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
@@ -42,6 +47,12 @@ public class FclServicingmainBiz {
 	@Resource
 	private FclServicinginfoDao sdao;
 
+	@Resource
+	private FclRescuecarDao rdao;
+
+	@Resource
+	private FclArtificergrowDao adao;
+
 	/**
 	 * 条件分页
 	 * 
@@ -64,12 +75,19 @@ public class FclServicingmainBiz {
 		list.forEach(temp -> {
 			FclServicingmainVo vo = new FclServicingmainVo();
 			vo.setSer(temp);
-			vo.setList(tdao.selectList(new QueryWrapper<Typeinfo>().in("infoid",
-					sdao.selectList(new QueryWrapper<Servicinginfo>().eq("smid", temp.getSmid())).stream()
-							.map(Servicinginfo::getInfoid).collect(Collectors.toList()))));
+			vo.setList(sdao.selectList(new QueryWrapper<Servicinginfo>().eq("smid", temp.getSmid())));
 			listvo.add(vo);
 		});
-		return new  PageInfo<>(listvo);
+		return new PageInfo<>(listvo);
 	}
 
+	/**
+	 * 接车页面初始shuju
+	 * 
+	 * @return
+	 */
+	public FclSerAllVo queryRescuecar() {
+		return new FclSerAllVo(rdao.selectList(new QueryWrapper<Rescuecar>().eq("state", 0)),
+				adao.selectList(new QueryWrapper<Artificergrow>().eq("state", 0)), cdao.selectList(null));
+	}
 }
