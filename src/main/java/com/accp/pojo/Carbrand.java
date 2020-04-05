@@ -1,6 +1,10 @@
 package com.accp.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+
 public class Carbrand {
+	
+	@TableId(value = "brandid")
     private Integer brandid;
 
 
