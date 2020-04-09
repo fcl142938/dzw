@@ -28,8 +28,8 @@ public class FclServicingmainAction {
 	private FclServicingmainBiz biz;
 	
 	@GetMapping("queryPage/{currentPage}/{pageSize}/{state}")
-	public PageInfo<FclServicingmainVo> queryPage(@PathVariable Integer currentPage,@PathVariable Integer pageSize, @PathVariable Integer state ){
-		return biz.queryPage(state, currentPage, pageSize);
+	public PageInfo<FclServicingmainVo> queryPage(@PathVariable Integer currentPage,@PathVariable Integer pageSize, @PathVariable Integer state,Integer status ){
+		return biz.queryPage(state, currentPage, pageSize,status);
 	}
 	
 	/**
@@ -69,6 +69,13 @@ public class FclServicingmainAction {
 	@GetMapping("queryShowData")
 	public  FclShowVo queryShowData() {
 		return biz.queryShowData();
+	}
+	
+	
+	@GetMapping("updateCourseState/{smid}/{state}")
+	public  String updateCourseState(@PathVariable String smid,@PathVariable Integer state) {
+		biz.updateCourseState(smid, state);
+		return "ok";
 	}
 	
 }
