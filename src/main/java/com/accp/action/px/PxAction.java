@@ -1,5 +1,6 @@
 package com.accp.action.px;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.accp.biz.px.PxBiz;
 import com.accp.pojo.Department;
+import com.accp.pojo.Position;
 import com.accp.pojo.Staff;
 import com.accp.vo.px.PX;
 import com.accp.vo.px.Pxdep;
+import com.github.pagehelper.PageInfo;
 
 @RestController
 @RequestMapping("px/api/user")
@@ -27,13 +30,13 @@ public class PxAction {
 	private PxBiz pbiz;
 	
 	//员工信息搜索与查询
-	@GetMapping("{staffname}")
-	private List<PX> queryall(@PathVariable String staffname){
+	@GetMapping("{staffname}/{pageNum}/{pageSize}")
+	private PageInfo<PX> queryall(@PathVariable String staffname,@PathVariable Integer pageNum, @PathVariable Integer pageSize){
 		
 		if("null".equals(staffname)) {
 			staffname=null;
 		}
-		return pbiz.queryall(staffname);
+		return pbiz.queryall(staffname, pageNum,pageSize);
 	}
 	//员工部门查询
 	@GetMapping("dep")
@@ -98,9 +101,7 @@ public class PxAction {
 	 public Department querybyid(@PathVariable  Integer departmentid) {
 			return pbiz.querybyid(departmentid);
 		}
-	 
 	 //修改部门名称
-	
 	  @PutMapping("modifdep") 
 	public Map<String, String> updatedeps(@RequestBody Department d) {
 			  pbiz.updatedeps(d);
@@ -110,6 +111,45 @@ public class PxAction {
 				 return message;
 	  
 	}
+	  //根据部门id查询职位
+	  @GetMapping("{departmentid}")
+	  public List<Position> querybydepid(@PathVariable Integer departmentid){
+		  return pbiz.querybydepid(departmentid);
+	  }
+	  //员工离职查询
+		@GetMapping("leave/{staffname}/{pageNum}/{pageSize}")
+		private PageInfo<PX> queryleave(@PathVariable String staffname,@PathVariable Integer pageNum, @PathVariable Integer pageSize){
+			if("null".equals(staffname)) {
+				staffname=null;
+			}
+			return pbiz.queryleave(staffname, pageNum,pageSize);
+		}
+		//员工姓名
+		@GetMapping("queryname")
+		public List<PX> queryname(){
+			return pbiz.queryname();
+		}
+		//员工离职
+		@PostMapping("updateleave/{sendtime}/{staffname}") 
+		public Map<String, String> updatestaff(@PathVariable String sendtime,@PathVariable String staffname ) {
+			pbiz.updatestaff(sendtime, staffname);
+			  Map<String, String> message = new HashMap<String, String>();
+				 message.put("code", "200");
+				 message.put("msg", "ok");
+				 return message;
+			
+		}
+		
+		//员工回滚
+			@PostMapping("updateleaveinfo/{staffname}") 
+				public Map<String, String> updatestaffinfo(@PathVariable String staffname ) {
+					pbiz.updatestaffinfo( staffname);
+					  Map<String, String> message = new HashMap<String, String>();
+						 message.put("code", "200");
+						 message.put("msg", "ok");
+						 return message;
+					
+				}
 	 
 	 
 
