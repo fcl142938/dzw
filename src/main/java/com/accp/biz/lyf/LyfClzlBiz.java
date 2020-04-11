@@ -29,4 +29,16 @@ public class LyfClzlBiz {
 	public int xiugaikehuche(Consumercar kehuche) {
 		return lyfclzldao.updateById(kehuche);
 	}
+	public int shanchukehu(String userid) {
+		return lyfclzldao.deleteById(userid);
+	}
+	public int shanchukehuche(Integer userid) {
+		return lyfclzldao.deleteById(userid);
+	}
+	public List<LyfClzlVo> chelianziliao() {
+		return lyfclzldao.chelianziliao();
+	}
+	public List<LyfClzlVo> chachepai(String chepai) {
+		return lyfclzldao.chachepai(chepai);
+	}
 }
