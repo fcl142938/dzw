@@ -14,9 +14,19 @@ public class Servicinginfo {
     private String infoname;
     private Double price;
     private String infomark;
+    private Integer courseid;
+    
     
 
-    public String getInfoname() {
+    public Integer getCourseid() {
+		return courseid;
+	}
+
+	public void setCourseid(Integer courseid) {
+		this.courseid = courseid;
+	}
+
+	public String getInfoname() {
 		return infoname;
 	}
 
