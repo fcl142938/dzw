@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.accp.dao.tyh.tyhISettlementCenterDAO">
+
+	<!-- 多条件查看 -->
+	<select id="queryByMaxSettlementCenter" resultType="SettlementCenter">
+		SELECT s.`smid`,s.`state`,s.`starttime`,s.`entime`,s.`staffid`,sf.`staffname`,s.`price`,c.`username`,cr.`carnumber`,m.`motorcyclename`,sf.`price` AS sfprice,c.`userremark` 
+		FROM `servicingmain` AS s
+		INNER JOIN `artificergrow` AS a
+		ON s.`gid` = a.`gid`
+		INNER JOIN `consumerinfo` AS c
+		ON s.`userid` = c.`userid`
+		INNER JOIN `staff` AS sf
+		ON s.`staffid` = sf.`staffid`
+		INNER JOIN `consumercar` AS cr
+		ON s.`consumerid` = cr.`consumerid`
+		INNER JOIN `motorcycle` AS m
+		ON cr.`motorcycleid` = m.`motorcycleid`
+		INNER JOIN `rescuecar` AS r
+		ON s.`rescueid` = r.`rescueid`
+		<where>
+			<if test="state == 3">and s.`state` = 3</if>
+			<if test="state == 4">and s.`state` = 4</if>
+		</where>
+	</select>
+
+	<!-- 回滚-->
+	<update id="tyhupdateByHgSettlementCenter">
+		update servicingmain set state = 3
+		where smid = #{smid}
+	</update>
+
+	<!-- 收银 -->
+	<update id="tyhupdateBySettlementCenter">
+		update servicingmain set state = 4
+		where smid = #{smid}
+	</update>
+
+	<!-- 结算中心查看 -->
+	<select id="queryBySettlementCenter" resultType="SettlementCenter">
+		SELECT s.`smid`,s.`state`,s.`starttime`,s.`entime`,s.`staffid`,sf.`staffname`,s.`price`,c.`username`,cr.`carnumber`,m.`motorcyclename`,sf.`price` AS sfprice,c.`userremark` 
+		FROM `servicingmain` AS s
+		INNER JOIN `artificergrow` AS a
+		ON s.`gid` = a.`gid`
+		INNER JOIN `consumerinfo` AS c
+		ON s.`userid` = c.`userid`
+		INNER JOIN `staff` AS sf
+		ON s.`staffid` = sf.`staffid`
+		INNER JOIN `consumercar` AS cr
+		ON s.`consumerid` = cr.`consumerid`
+		INNER JOIN `motorcycle` AS m
+		ON cr.`motorcycleid` = m.`motorcycleid`
+		INNER JOIN `rescuecar` AS r
+		ON s.`rescueid` = r.`rescueid`
+	</select>
+
+</mapper>
