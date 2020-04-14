@@ -23,4 +23,23 @@ public class LyfChexingBiz {
 		qw.eq("brandid",id);
 		return lyfchexingdao.selectList(qw);
 	}
+	public int shanchexing(int brandid) {
+		QueryWrapper<Motorcycle> qw=Wrappers.query();
+		qw.eq("brandid",brandid);
+		return lyfchexingdao.delete(qw);
+	}
+	public List<Motorcycle> chachexing(int brandid) {
+		QueryWrapper<Motorcycle> qw=Wrappers.query();
+		qw.eq("brandid",brandid);
+		return lyfchexingdao.selectList(qw);
+	}
+	public int addchexing(Motorcycle chexing) {
+		return lyfchexingdao.insert(chexing);
+	}
+	public int xgchexing(Motorcycle chexing) {
+		return lyfchexingdao.updateById(chexing);
+	}
+	public int shanchexing1(Integer motorcycleid) {
+		return lyfchexingdao.deleteById(motorcycleid);
+	}
 }
