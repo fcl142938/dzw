@@ -14,9 +14,19 @@ public class Servicinginfo {
     private String infoname;
     private Double price;
     private String infomark;
+    private Integer courseid;
+    
     
 
-    public String getInfoname() {
+    public Integer getCourseid() {
+		return courseid;
+	}
+
+	public void setCourseid(Integer courseid) {
+		this.courseid = courseid;
+	}
+
+	public String getInfoname() {
 		return infoname;
 	}
 
@@ -63,4 +73,20 @@ public class Servicinginfo {
     public void setInfoid(Integer infoid) {
         this.infoid = infoid;
     }
+    
+    public Servicinginfo() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Servicinginfo(String smid, Integer infoid, String infoname, Double price, String infomark,
+			Integer courseid) {
+		super();
+		this.smid = smid;
+		this.infoid = infoid;
+		this.infoname = infoname;
+		this.price = price;
+		this.infomark = infomark;
+		this.courseid = courseid;
+	}
+    
 }

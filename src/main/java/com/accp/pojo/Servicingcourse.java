@@ -67,4 +67,19 @@ public class Servicingcourse {
     public void setCoursemark(String coursemark) {
         this.coursemark = coursemark == null ? null : coursemark.trim();
     }
+    public Servicingcourse() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Servicingcourse(Integer courseid, String smid, Date coursestarttime, Date courseendtime, Integer coursestate,
+			String coursemark) {
+		super();
+		this.courseid = courseid;
+		this.smid = smid;
+		this.coursestarttime = coursestarttime;
+		this.courseendtime = courseendtime;
+		this.coursestate = coursestate;
+		this.coursemark = coursemark;
+	}
+    
 }

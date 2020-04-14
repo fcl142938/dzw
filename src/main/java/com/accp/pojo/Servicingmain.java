@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 
 public class Servicingmain {
+	
+	@TableId(value = "smid")
     private String smid;
 
     private Integer gid;
@@ -24,9 +26,9 @@ public class Servicingmain {
 
     private Date entime;
 
-    private Long countprice;
+    private Double countprice;
 
-    private Long price;
+    private Double price;
 
     private Integer state;
 
@@ -96,19 +98,19 @@ public class Servicingmain {
         this.entime = entime;
     }
 
-    public Long getCountprice() {
+    public Double getCountprice() {
         return countprice;
     }
 
-    public void setCountprice(Long countprice) {
+    public void setCountprice(Double countprice) {
         this.countprice = countprice;
     }
 
-    public Long getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -119,4 +121,5 @@ public class Servicingmain {
     public void setState(Integer state) {
         this.state = state;
     }
+    
 }

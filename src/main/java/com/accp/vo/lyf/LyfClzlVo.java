@@ -3,6 +3,7 @@ package com.accp.vo.lyf;
 import java.util.Date;
 
 public class LyfClzlVo {
+	private String userid;
 	private Integer consumerid;
 	private String carnumber;
 	private String brandname;
@@ -12,6 +13,13 @@ public class LyfClzlVo {
 	private Date driverbrithday;
 	private String motorletter;
 	private String motorname;
+	
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 	public Integer getConsumerid() {
 		return consumerid;
 	}
@@ -66,9 +74,10 @@ public class LyfClzlVo {
 	public void setMotorname(String motorname) {
 		this.motorname = motorname;
 	}
-	public LyfClzlVo(Integer consumerid, String carnumber, String brandname, String motorcyclename, String drivername,
-			String driverphone, Date driverbrithday, String motorletter, String motorname) {
+	public LyfClzlVo(String userid, Integer consumerid, String carnumber, String brandname, String motorcyclename,
+			String drivername, String driverphone, Date driverbrithday, String motorletter, String motorname) {
 		super();
+		this.userid = userid;
 		this.consumerid = consumerid;
 		this.carnumber = carnumber;
 		this.brandname = brandname;
