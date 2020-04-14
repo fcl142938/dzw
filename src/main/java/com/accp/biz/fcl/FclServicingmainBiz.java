@@ -118,6 +118,11 @@ public class FclServicingmainBiz {
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, readOnly = false)
 	public void addSerMain(FclServicingmainVo vo) {
+		//修改客户车状态
+		Consumercar car= new Consumercar();
+		car.setConstate(1);
+		car.setConsumerid(vo.getSer().getConsumerid());
+		cdao.updateById(car);
 		// 添加主单 获取主单号
 		String smid = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 		vo.getSer().setStarttime(new Date());
@@ -157,6 +162,11 @@ public class FclServicingmainBiz {
 		if (se.getCoursestate() == 0) {
 			sermain.setState(3);
 			sermain.setEntime(new Date());
+			//修改客户车状态
+			Consumercar car= new Consumercar();
+			car.setConstate(0);
+			car.setConsumerid(sermain.getConsumerid());
+			cdao.updateById(car);
 		} else {
 			//添加一条返工记录
 			sdao.insert(new Servicinginfo(se.getSmid(), 0, "返工费", 200.0, "维修返工", 0));

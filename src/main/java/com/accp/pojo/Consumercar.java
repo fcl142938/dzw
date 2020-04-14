@@ -28,15 +28,15 @@ public class Consumercar {
 
     private Date buycar;
     
-    private Integer conState;
+    private Integer constate;
     
 
-    public Integer getConState() {
-		return conState;
+    public Integer getConstate() {
+		return constate;
 	}
 
-	public void setConState(Integer conState) {
-		this.conState = conState;
+	public void setConstate(Integer constate) {
+		this.constate = constate;
 	}
 
 	public Integer getConsumerid() {
