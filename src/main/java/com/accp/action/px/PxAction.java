@@ -37,7 +37,6 @@ public class PxAction {
 			staffname=null;
 			
 			
-			
 		}
 		return pbiz.queryall(staffname, pageNum,pageSize);
 	}
