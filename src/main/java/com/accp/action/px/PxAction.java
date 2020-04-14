@@ -35,6 +35,9 @@ public class PxAction {
 		
 		if("null".equals(staffname)) {
 			staffname=null;
+			
+			
+			
 		}
 		return pbiz.queryall(staffname, pageNum,pageSize);
 	}
