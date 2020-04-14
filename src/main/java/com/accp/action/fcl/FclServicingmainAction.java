@@ -69,6 +69,7 @@ public class FclServicingmainAction {
 	@GetMapping("queryShowData")
 	public  FclShowVo queryShowData() {
 		return biz.queryShowData();
+		
 	}
 	
 	

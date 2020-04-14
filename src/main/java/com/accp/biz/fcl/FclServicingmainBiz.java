@@ -172,7 +172,7 @@ public class FclServicingmainBiz {
 			sdao.insert(new Servicinginfo(se.getSmid(), 0, "返工费", 200.0, "维修返工", 0));
 			// 返工
 			sermain.setState(5);
-			sermain.setPrice(sermain.getPrice()+200);
+			sermain.setPrice(sermain.getCountprice()+200);
 		}
 		dao.updateById(sermain);
 	}
@@ -212,7 +212,7 @@ public class FclServicingmainBiz {
 				}
 			}
 		}	
-		return new FclShowVo(countprice, dao.selectList(new QueryWrapper<Servicingmain>().eq("starttime",date)).size(), scdao.selectList(new QueryWrapper<Servicingcourse>().eq("courseendtime", date).eq("coursestate",0)).size(), scdao.selectList(new QueryWrapper<Servicingcourse>().eq("courseendtime", date).eq("coursestate",1)).size());
+		return new FclShowVo(countprice, dao.selectList(new QueryWrapper<Servicingmain>().eq("starttime",date)).size(), scdao.selectList(new QueryWrapper<Servicingcourse>().eq("courseendtime", date).eq("coursestate",3)).size(), scdao.selectList(new QueryWrapper<Servicingcourse>().eq("courseendtime", date).eq("coursestate",1)).size());
 	}
 	
 	//技工操作
@@ -244,6 +244,7 @@ public class FclServicingmainBiz {
 		sdao.delete(new QueryWrapper<Servicinginfo>().eq("smid", ser.getSmid()));
 		Double countprice=0.0;
 		for (Servicinginfo obj : vo.getList()) {
+			obj.setSmid(ser.getSmid());
 			sdao.insert(obj);
 			countprice += obj.getPrice();
 		}
