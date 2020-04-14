@@ -27,8 +27,19 @@ public class Consumercar {
     private Long carcourse;
 
     private Date buycar;
+    
+    private Integer conState;
+    
 
-    public Integer getConsumerid() {
+    public Integer getConState() {
+		return conState;
+	}
+
+	public void setConState(Integer conState) {
+		this.conState = conState;
+	}
+
+	public Integer getConsumerid() {
         return consumerid;
     }
 

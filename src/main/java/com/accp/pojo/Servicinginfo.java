@@ -73,4 +73,20 @@ public class Servicinginfo {
     public void setInfoid(Integer infoid) {
         this.infoid = infoid;
     }
+    
+    public Servicinginfo() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Servicinginfo(String smid, Integer infoid, String infoname, Double price, String infomark,
+			Integer courseid) {
+		super();
+		this.smid = smid;
+		this.infoid = infoid;
+		this.infoname = infoname;
+		this.price = price;
+		this.infomark = infomark;
+		this.courseid = courseid;
+	}
+    
 }

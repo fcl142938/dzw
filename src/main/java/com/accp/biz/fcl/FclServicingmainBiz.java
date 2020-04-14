@@ -108,7 +108,7 @@ public class FclServicingmainBiz {
 	 */
 	public FclSerAllVo queryRescuecar() {
 		return new FclSerAllVo(rdao.selectList(new QueryWrapper<Rescuecar>().eq("state", 0)),
-				adao.selectList(new QueryWrapper<Artificergrow>().eq("state", 0)), cdao.selectList(null));
+				adao.selectList(new QueryWrapper<Artificergrow>().eq("state", 0)), cdao.selectList(new QueryWrapper<Consumercar>().eq("conState",0)));
 	}
 
 	/**
@@ -129,6 +129,7 @@ public class FclServicingmainBiz {
 			sdao.insert(obj);
 			countprice += obj.getPrice();
 		}
+		vo.getSer().setPrice(countprice);
 		vo.getSer().setCountprice(countprice);
 		dao.insert(vo.getSer());
 	}
@@ -157,8 +158,11 @@ public class FclServicingmainBiz {
 			sermain.setState(3);
 			sermain.setEntime(new Date());
 		} else {
+			//添加一条返工记录
+			sdao.insert(new Servicinginfo(se.getSmid(), 0, "返工费", 200.0, "维修返工", 0));
 			// 返工
 			sermain.setState(5);
+			sermain.setPrice(sermain.getPrice()+200);
 		}
 		dao.updateById(sermain);
 	}
@@ -212,8 +216,29 @@ public class FclServicingmainBiz {
 			scdao.insert(new Servicingcourse(null, smid, new Date(), null,3, null));
 		}else {
 			//提交施工
-			scdao.update(new Servicingcourse(null, smid, null, null,2, null),new QueryWrapper<Servicingcourse>().eq("smid",smid).eq("coursestate",3));
+			scdao.update(new Servicingcourse(null, smid, null, new Date(),2, null),new QueryWrapper<Servicingcourse>().eq("smid",smid).eq("coursestate",3));
 		}
 		
 	}
+	
+	/**
+	 * 修改
+	 * 
+	 * @param vo
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, readOnly = false)
+	public void UpSerMain(FclServicingmainVo vo) {
+		// 添加主单 获取主单号
+		Servicingmain ser=new Servicingmain();
+		ser.setSmid(vo.getSer().getSmid());
+		sdao.delete(new QueryWrapper<Servicinginfo>().eq("smid", ser.getSmid()));
+		Double countprice=0.0;
+		for (Servicinginfo obj : vo.getList()) {
+			sdao.insert(obj);
+			countprice += obj.getPrice();
+		}
+		ser.setPrice(countprice);
+		dao.updateById(ser);
+	}
+	
 }

@@ -78,4 +78,11 @@ public class FclServicingmainAction {
 		return "ok";
 	}
 	
+	
+	@PostMapping("UpSerMain")
+	public  String UpSerMain(@RequestBody FclServicingmainVo vo) {
+		biz.UpSerMain(vo);
+		return "ok";
+	}
+	
 }
