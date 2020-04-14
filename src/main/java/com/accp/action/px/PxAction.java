@@ -59,6 +59,8 @@ public class PxAction {
 	 @GetMapping("sta/{staffid}")
 		public Staff querybystaffid(@PathVariable Integer staffid) {
 			return pbiz.querybystaffid(staffid) ;
+			
+			
 		}
 	 
 	//根据员工id修改员工信息
