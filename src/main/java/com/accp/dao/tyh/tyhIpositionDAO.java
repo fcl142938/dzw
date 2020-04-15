@@ -9,8 +9,6 @@ import com.accp.vo.tyh.PositionAndDepartment;
 
 public interface tyhIpositionDAO {
 	
-	/* ... */
-	
 	/* 删除岗位 */
 	int tyhDelPositionById(@Param("positionid") Integer positionid);
 	

@@ -1,5 +1,6 @@
 package com.accp.action.tyh;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.accp.biz.tyh.tyhSettlementCenterBiz;
 import com.accp.vo.tyh.SettlementCenter;
+import com.accp.vo.tyh.tyhParticulars;
 
 @RestController
 @RequestMapping("/tyh/api/sc")
@@ -23,15 +25,40 @@ public class tyhSettlementCenterAction {
 	@Autowired
 	private tyhSettlementCenterBiz biz;
 	
-	//多条件查询
-	@GetMapping("/queryByMaxSettlementCenter/{state}")
-	public List<SettlementCenter> queryByMaxSettlementCenter(@PathVariable Integer state){
-		if(state == 3) {
-			state = 3;
-		} else if(state == 4) {
-			state = 4;
-		}
-		return biz.queryByMaxSettlementCenter(state);
+	/**
+	 *  维修项目 
+	 * @param infoid
+	 * @return
+	 */
+	@GetMapping("/tyhQueryByXm/{infoid}")
+	public List<tyhParticulars> tyhQueryByXm(@PathVariable Integer infoid){
+		return biz.tyhQueryByXm(infoid);
+	}
+	
+	/**
+	 *  打开单据 
+	 */
+	@GetMapping("/tyhQueryByXq/{smid}")
+	public tyhParticulars tyhQueryByXq(@PathVariable Integer smid) {
+		return biz.tyhQueryByXq(smid);
+	}
+	
+	/**
+	 * 多条件查询
+	 * @param state
+	 * @param smid
+	 * @param carnumber
+	 * @param username
+	 * @param staffname
+	 * @param userremark
+	 * @param starttime
+	 * @param entime
+	 * @return
+	 */
+	@GetMapping("/queryByMaxSettlementCenter/{state}/{smid}/{carnumber}/{username}/{staffname}/{userremark}/{starttime}/{entime}")
+	public List<SettlementCenter> queryByMaxSettlementCenter(@PathVariable String state,@PathVariable String smid,@PathVariable String carnumber,@PathVariable String username,@PathVariable String staffname,@PathVariable String userremark,@PathVariable String starttime,@PathVariable String entime){
+		System.out.println("========="+starttime+"+"+entime);
+		return biz.queryByMaxSettlementCenter(state, smid, carnumber, username, staffname, userremark, starttime, entime);
 	}
 	
 	/**

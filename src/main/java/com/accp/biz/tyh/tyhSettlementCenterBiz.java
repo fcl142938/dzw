@@ -1,5 +1,6 @@
 package com.accp.biz.tyh;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.accp.dao.tyh.tyhISettlementCenterDAO;
 import com.accp.vo.tyh.SettlementCenter;
+import com.accp.vo.tyh.tyhParticulars;
 
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, isolation = Isolation.READ_COMMITTED, readOnly = true)
@@ -19,9 +21,19 @@ public class tyhSettlementCenterBiz {
 	@Autowired
 	private tyhISettlementCenterDAO dao;
 	
+	/* 维修项目 */
+	public List<tyhParticulars> tyhQueryByXm(Integer infoid){
+		return dao.tyhQueryByXm(infoid);
+	}
+	
+	/* 打开单据 */
+	public tyhParticulars tyhQueryByXq(Integer smid) {
+		return dao.tyhQueryByXq(smid);
+	}
+	
 	//多条件查询
-	public List<SettlementCenter> queryByMaxSettlementCenter(Integer state){
-		return dao.queryByMaxSettlementCenter(state);
+	public List<SettlementCenter> queryByMaxSettlementCenter(String state,String smid, String carnumber, String username, String staffname, String userremark,String starttime, String entime){
+		return dao.queryByMaxSettlementCenter(state, smid, carnumber, username, staffname, userremark, starttime, entime);
 	}
 	
 	//回滚
