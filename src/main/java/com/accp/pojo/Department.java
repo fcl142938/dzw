@@ -1,5 +1,8 @@
 package com.accp.pojo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 
@@ -8,7 +11,7 @@ public class Department {
     private Integer departmentid;
 
     private String departmentname;
-
+    
     public Integer getDepartmentid() {
         return departmentid;
     }

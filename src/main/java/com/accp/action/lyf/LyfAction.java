@@ -168,6 +168,91 @@ public class LyfAction {
 	public List<LyfClzlVo> chachepai(@PathVariable String chepai) {
 		return lyfclzlbiz.chachepai(chepai);
 	}
+	@GetMapping("cxdaqcpp")
+	public List<Carbrand> cxdaqcpp() {
+		return lyfcheliangpinpaibiz.cxdaqcpp();
+	}
+	@PostMapping("addpinpai")
+	public Map<String, Object> addpinpai(@RequestBody Carbrand pinpai) {
+		Map<String, Object> message = new HashMap<String, Object>();
+		int count=lyfcheliangpinpaibiz.addpinpai(pinpai);
+		if(count>0) {
+			message.put("code", "200");
+			message.put("msg", "新增成功");
+		}else {
+			message.put("code", "300");
+			message.put("msg", "新增失败");
+		}
+		return message;
+	}
+	@PostMapping("xiugaipinpai")
+	public Map<String, Object> xiugaipinpai(@RequestBody Carbrand pinpai) {
+		Map<String, Object> message = new HashMap<String, Object>();
+		int count=lyfcheliangpinpaibiz.xiugaipinpai(pinpai);
+		if(count>0) {
+			message.put("code", "200");
+			message.put("msg", "修改成功");
+		}else {
+			message.put("code", "300");
+			message.put("msg", "修改失败");
+		}
+		return message;
+	}
+	@DeleteMapping("shanpinpai/{brandid}")
+	public Map<String, Object> shanpinpai(@PathVariable Integer brandid) {
+		Map<String, Object> message = new HashMap<String, Object>();
+		int count=lyfcheliangpinpaibiz.shanpinpai(brandid);
+		lyfchexingbiz.shanchexing(brandid);
+		if(count>0) {
+			message.put("code", "200");
+		}else {
+			message.put("code", "300");
+			message.put("msg", "删除失败");
+		}
+		return message;
+	}
+	@GetMapping("chachexing/{brandid}")
+	public List<Motorcycle> chachexing(@PathVariable int brandid) {
+		return lyfchexingbiz.chachexing(brandid);
+	}
+	@PostMapping("addchexing")
+	public Map<String, Object> addchexing(@RequestBody Motorcycle chexing) {
+		Map<String, Object> message = new HashMap<String, Object>();
+		int count=lyfchexingbiz.addchexing(chexing);
+		if(count>0) {
+			message.put("code", "200");
+			message.put("msg", "新增成功");
+		}else {
+			message.put("code", "300");
+			message.put("msg", "新增失败");
+		}
+		return message;
+	}
+	@PostMapping("xgchexing")
+	public Map<String, Object> xgchexing(@RequestBody Motorcycle chexing) {
+		Map<String, Object> message = new HashMap<String, Object>();
+		int count=lyfchexingbiz.xgchexing(chexing);
+		if(count>0) {
+			message.put("code", "200");
+			message.put("msg", "修改成功");
+		}else {
+			message.put("code", "300");
+			message.put("msg", "修改失败");
+		}
+		return message;
+	}
+	@DeleteMapping("shanchexing/{motorcycleid}")
+	public Map<String, Object> shanchexing(@PathVariable Integer motorcycleid) {
+		Map<String, Object> message = new HashMap<String, Object>();
+		int count=lyfchexingbiz.shanchexing1(motorcycleid);
+		if(count>0) {
+			message.put("code", "200");
+		}else {
+			message.put("code", "300");
+			message.put("msg", "删除失败");
+		}
+		return message;
+	}
 	@GetMapping("daochukhzl")
 	public Map<String, Object> daochukhzl() {
 		Map<String, Object> message = new HashMap<String, Object>();

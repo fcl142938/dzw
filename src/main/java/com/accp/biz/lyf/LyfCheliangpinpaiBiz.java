@@ -19,4 +19,16 @@ public class LyfCheliangpinpaiBiz {
 	public List<Carbrand> cheliangpinpai() {
 		return lyfcheliangpinpaidao.selectList(null);
 	}
+	public List<Carbrand> cxdaqcpp() {
+		return lyfcheliangpinpaidao.selectList(null);
+	}
+	public int addpinpai(Carbrand pinpai) {
+		return lyfcheliangpinpaidao.insert(pinpai);
+	}
+	public int xiugaipinpai(Carbrand pinpai) {
+		return lyfcheliangpinpaidao.updateById(pinpai);
+	}
+	public int shanpinpai(int brandid) {
+		return lyfcheliangpinpaidao.deleteById(brandid);
+	}
 }

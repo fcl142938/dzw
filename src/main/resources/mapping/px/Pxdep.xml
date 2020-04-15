@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.accp.dao.px.PxdepartmentDao">
-        <resultMap type="com.accp.pojo.Department" id="tbMap">
-		<id property="departmentid" column="departmentid"/>
-		<result property="departmentname" column="departmentname"/>
-	<collection property="list" column="departmentid" select="se"/>
-	</resultMap>
-	
-	<select id="querydep" resultMap="tbMap">
-	   SELECT * FROM department 
-	</select>
-	<select id="se" resultType="com.accp.pojo.Position">
-	  SELECT * FROM `position`  group by departmentid
-	</select>
-
+      
+  <select id="querybydepid" resultType="com.accp.pojo.Position">
+  select * from `position` where `departmentid`=#{departmentid}
+  </select>
    
    
 </mapper>

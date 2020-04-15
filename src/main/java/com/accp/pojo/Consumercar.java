@@ -27,8 +27,19 @@ public class Consumercar {
     private Long carcourse;
 
     private Date buycar;
+    
+    private Integer constate;
+    
 
-    public Integer getConsumerid() {
+    public Integer getConstate() {
+		return constate;
+	}
+
+	public void setConstate(Integer constate) {
+		this.constate = constate;
+	}
+
+	public Integer getConsumerid() {
         return consumerid;
     }
 

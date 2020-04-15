@@ -69,12 +69,20 @@ public class FclServicingmainAction {
 	@GetMapping("queryShowData")
 	public  FclShowVo queryShowData() {
 		return biz.queryShowData();
+		
 	}
 	
 	
 	@GetMapping("updateCourseState/{smid}/{state}")
 	public  String updateCourseState(@PathVariable String smid,@PathVariable Integer state) {
 		biz.updateCourseState(smid, state);
+		return "ok";
+	}
+	
+	
+	@PostMapping("UpSerMain")
+	public  String UpSerMain(@RequestBody FclServicingmainVo vo) {
+		biz.UpSerMain(vo);
 		return "ok";
 	}
 	
