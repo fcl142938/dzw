@@ -39,6 +39,7 @@ import jxl.write.WritableWorkbook;
 	 	public Map<String, Object> daochukhzl(@PathVariable String staffname,@PathVariable Integer pageNum, @PathVariable Integer pageSize,@PathVariable String departmentname,@PathVariable String positionname) {
 	    	 if("null".equals(staffname)) {
 	 			staffname=null;
+	 			
 	 		}
 	    	 if("null".equals(departmentname)) {
 	 			departmentname=null;
