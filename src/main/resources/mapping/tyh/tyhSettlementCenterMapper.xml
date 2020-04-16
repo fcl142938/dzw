@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.accp.dao.tyh.tyhISettlementCenterDAO">
+
+	<!-- 维修项目 -->
+	<select id="tyhQueryByXm" resultType="tyhParticulars">
+		SELECT * FROM `servicinginfo` AS s
+		INNER JOIN `typeinfo` AS tt
+		ON s.`infoid` = tt.`infoid`
+		INNER JOIN `type` AS t
+		ON tt.`typeid` = t.`typeid`
+		WHERE tt.`infoid` = #{infoid}
+	</select>
+
+	<!-- 打开单据 -->
+	<select id="tyhQueryByXq" resultType="tyhParticulars">
+		SELECT so.`infoid`,s.`smid`,cr.carnumber,m.`motorcyclename`,cd.`brandname`,md.`motorid`,md.`motorname`,sf.staffname,c.`username`,cr.`drivername`,cr.`driverphone`,cr.`carcourse`,s.`starttime`,s.`entime`,s.`countprice`,c.`userremark`,s.`consumermark` FROM `servicingmain` AS s
+		INNER JOIN `servicinginfo` AS so
+		ON s.`smid` = so.`smid`
+		INNER JOIN `typeinfo` AS t
+		ON so.`infoid` = t.`infoid`
+		INNER JOIN `staff` AS sf
+		ON s.`staffid` = sf.`staffid`
+		INNER JOIN `consumerinfo` AS c
+		ON s.`userid` = c.`userid`
+		INNER JOIN `consumercar` AS cr
+		ON c.`userid` = cr.`userid`
+		INNER JOIN `motorcycle` AS m
+		ON cr.`motorcycleid` = m.`motorcycleid`
+		INNER JOIN `carbrand` AS cd
+		ON m.`brandid` = cd.`brandid`
+		INNER JOIN `motorbrand` AS md
+		ON m.`motorid` = md.`motorid`
+		WHERE s.`smid` = #{smid}
+	</select>
+
+	<!-- 多条件查看 -->
+	<select id="queryByMaxSettlementCenter" resultType="SettlementCenter">
+		SELECT s.`smid`,s.`state`,s.`starttime`,s.`entime`,s.`staffid`,sf.`staffname`,s.`price`,c.`username`,cr.`carnumber`,m.`motorcyclename`,sf.`price` AS sfprice,c.`userremark` 
+		FROM `servicingmain` AS s
+		INNER JOIN `artificergrow` AS a
+		ON s.`gid` = a.`gid`
+		INNER JOIN `consumerinfo` AS c
+		ON s.`userid` = c.`userid`
+		INNER JOIN `staff` AS sf
+		ON s.`staffid` = sf.`staffid`
+		INNER JOIN `consumercar` AS cr
+		ON s.`consumerid` = cr.`consumerid`
+		INNER JOIN `motorcycle` AS m
+		ON cr.`motorcycleid` = m.`motorcycleid`
+		INNER JOIN `rescuecar` AS r
+		ON s.`rescueid` = r.`rescueid`
+		<where>
+			<if test="state != 'null'">and s.`state` = #{state}</if>
+			<if test="smid != 'null'">and s.`smid` = #{smid}</if>
+			<if test="carnumber != 'null'">and cr.`carnumber` = #{carnumber}</if>
+			<if test="username != 'null'">and c.`username` = #{username}</if>
+			<if test="staffname != 'null'">and sf.`staffname` = #{staffname}</if>
+			<if test="userremark != 'null'">and c.`userremark` = #{userremark}</if>
+			<if test="starttime != 'null'">and s.`starttime` BETWEEN #{starttime} AND #{entime}</if>
+			<if test="entime != 'null'">and s.`entime` BETWEEN #{starttime} AND #{entime}</if>
+		</where>
+	</select>
+
+	<!-- 回滚-->
+	<update id="tyhupdateByHgSettlementCenter">
+		update servicingmain set state = 3
+		where smid = #{smid}
+	</update>
+
+	<!-- 收银 -->
+	<update id="tyhupdateBySettlementCenter">
+		update servicingmain set state = 4
+		where smid = #{smid}
+	</update>
+
+	<!-- 结算中心查看 -->
+	<select id="queryBySettlementCenter" resultType="SettlementCenter">
+		SELECT s.`smid`,s.`state`,s.`starttime`,s.`entime`,s.`staffid`,sf.`staffname`,s.`price`,c.`username`,cr.`carnumber`,m.`motorcyclename`,sf.`price` AS sfprice,c.`userremark` 
+		FROM `servicingmain` AS s
+		INNER JOIN `artificergrow` AS a
+		ON s.`gid` = a.`gid`
+		INNER JOIN `consumerinfo` AS c
+		ON s.`userid` = c.`userid`
+		INNER JOIN `staff` AS sf
+		ON s.`staffid` = sf.`staffid`
+		INNER JOIN `consumercar` AS cr
+		ON s.`consumerid` = cr.`consumerid`
+		INNER JOIN `motorcycle` AS m
+		ON cr.`motorcycleid` = m.`motorcycleid`
+		INNER JOIN `rescuecar` AS r
+		ON s.`rescueid` = r.`rescueid`
+	</select>
+
+</mapper>

@@ -1,10 +1,11 @@
 package com.accp.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 
 public class Carbrand {
 	
-	@TableId(value = "brandid")
+	@TableId(type = IdType.AUTO,value = "brandid")
     private Integer brandid;
 
 

@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.accp.dao.lyf.LyfKhzlDao;
 import com.accp.pojo.Consumerinfo;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, isolation = Isolation.READ_COMMITTED, readOnly = true)
@@ -24,5 +26,13 @@ public class LyfKhzlBiz {
 	}
 	public int xiugaikehu(Consumerinfo kehu) {
 		return lyfkhzldao.updateById(kehu);
+	}
+	public int shanchukehu(String userid) {
+		return lyfkhzldao.deleteById(userid);
+	}
+	public List<Consumerinfo> khzl(String userid) {
+		QueryWrapper<Consumerinfo> qw=Wrappers.query();
+		qw.eq("userid", userid);
+		return lyfkhzldao.selectList(qw);
 	}
 }

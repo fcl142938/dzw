@@ -8,13 +8,40 @@ FROM `department` AS d,`position` AS p,`staff` AS s
 <where>
   d.`departmentid`=p.`departmentid` AND s.`positionid`=p.`positionid`
    <if test="staffname!=null">
-   and   `staffname` like '%${staffname}%'
+   and   `staffname` like '%${staffname}%' 
 </if>  
+and s.state=0
 </where>
 
  
       
    </select>
+   
+   <select id="queryaleave" resultType="com.accp.vo.px.PX">
+        SELECT  s.`staffid`,d.`departmentname`,p.`positionname`,
+s.`staffname`,s.`staffsex`,s.`saddress`,s.`sstarttime`,s.sendtime,s.`staffaccount`,s.`price` 
+FROM `department` AS d,`position` AS p,`staff` AS s
+<where>
+  d.`departmentid`=p.`departmentid` AND s.`positionid`=p.`positionid`
+   <if test="staffname!=null">
+   and   `staffname` like '%${staffname}%' 
+</if>  
+and s.state=1
+</where>
+   
+   </select>
+   
+   <select id="queryname" resultType="com.accp.vo.px.PX">
+   select * from staff where state=0
+   </select>
+   
+   <update id="updatestaff">
+   update staff set sendtime=#{sendtime,jdbcType=DATE},state=1 where staffname=#{staffname}
+   </update>
+   
+     <update id="updatestaffinfo">
+   update staff set sendtime=null,state=0 where staffname=#{staffname}
+   </update>
 
 
 </mapper>

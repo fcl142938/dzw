@@ -14,6 +14,8 @@ public class PX {
 	private String staffaccount;
     @JSONField(format = "yyyy-MM-dd")
 	private  Date sstarttime;
+    @JSONField(format = "yyyy-MM-dd")
+    private Date sendtime;
 	private  Integer price;
 	public Integer getStaffid() {
 		return staffid;
@@ -69,6 +71,21 @@ public class PX {
 	public void setStaffaccount(String staffaccount) {
 		this.staffaccount = staffaccount;
 	}
+	
+	public Date getSendtime() {
+		return sendtime;
+	}
+	public void setSendtime(Date sendtime) {
+		this.sendtime = sendtime;
+	}
+	@Override
+	public String toString() {
+		return "PX [staffid=" + staffid + ", departmentname=" + departmentname + ", positionname=" + positionname
+				+ ", staffname=" + staffname + ", staffsex=" + staffsex + ", saddress=" + saddress + ", staffaccount="
+				+ staffaccount + ", sstarttime=" + sstarttime + ", price=" + price + "]";
+	}
+	
+	
 	
 	
 	
