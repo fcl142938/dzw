@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 
 public class Motorbrand {
 	
-	@TableId(type = IdType.AUTO,value = "motorid")
+	@TableId(type = IdType.INPUT,value = "motorid")
     private Integer motorid;
 
     private String motorname;
