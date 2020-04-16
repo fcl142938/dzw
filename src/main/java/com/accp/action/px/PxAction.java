@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,14 +31,19 @@ public class PxAction {
 	private PxBiz pbiz;
 	
 	//员工信息搜索与查询
-	@GetMapping("{staffname}/{pageNum}/{pageSize}")
-	private PageInfo<PX> queryall(@PathVariable String staffname,@PathVariable Integer pageNum, @PathVariable Integer pageSize){
+	@GetMapping("{staffname}/{pageNum}/{pageSize}/{departmentname}/{positionname}")
+	private PageInfo<PX> queryall(@PathVariable String staffname,@PathVariable Integer pageNum, @PathVariable Integer pageSize,@PathVariable String departmentname,@PathVariable String positionname){
 		
 		if("null".equals(staffname)) {
 			staffname=null;
-			
 		}
-		return pbiz.queryall(staffname, pageNum,pageSize);
+		if("null".equals(departmentname)) {
+			departmentname=null;
+		}
+		if("null".equals(positionname)) {
+			positionname=null;
+		}
+		return pbiz.queryall(staffname, pageNum, pageSize, departmentname, positionname);
 	}
 	//员工部门查询
 	@GetMapping("dep")
@@ -56,9 +62,14 @@ public class PxAction {
 	}
 	    //根据员工id查询员工信息
 	 @GetMapping("sta/{staffid}")
-		public Staff querybystaffid(@PathVariable Integer staffid) {
+		public PX querybystaffid(@PathVariable Integer staffid) {
 			return pbiz.querybystaffid(staffid) ;
 		}
+	 //员工职位查询
+	 @GetMapping("position")
+	public List<Position> selectposition(){
+		 return pbiz.selectposition();
+	 }
 	 
 	//根据员工id修改员工信息
 	 @PutMapping("sta")

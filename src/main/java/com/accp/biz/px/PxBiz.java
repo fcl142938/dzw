@@ -38,9 +38,9 @@ public class PxBiz {
 	private  PxdepDao xdao;
 	
 	//员工信息查询与搜索
-	public PageInfo<PX> queryall(String staffname,Integer pageNum,Integer pageSize){
+	public PageInfo<PX> queryall(String staffname,Integer pageNum,Integer pageSize,String departmentname,String positionname){
 		PageHelper.startPage(pageNum, pageSize);
-		return  new PageInfo<PX>(pdao.queryall(staffname));
+		return  new PageInfo<PX>(pdao.queryall(staffname, departmentname, positionname));
 	}
 	
 	//部门查询
@@ -52,9 +52,13 @@ public class PxBiz {
 	public int addstaff(Staff sta) {
 		 return sdao.insert(sta);
 	}
+	//员工职位查询
+	public List<Position> selectposition(){
+		return pdao.selectposition();
+	}
 	//根据员工id查询员工信息
-	public Staff querybystaffid(Integer staffid) {
-		return sdao.selectById(staffid);
+	public PX querybystaffid(Integer staffid) {
+		return pdao.selectbystaffid(staffid);
 	}
 	//根据员工id删除员工信息
 	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, readOnly = false)

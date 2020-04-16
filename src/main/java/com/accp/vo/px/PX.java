@@ -12,11 +12,34 @@ public class PX {
 	private  String staffsex;
 	private  String saddress;
 	private String staffaccount;
+	private String staffpwd;
+	private String idcd;
     @JSONField(format = "yyyy-MM-dd")
 	private  Date sstarttime;
     @JSONField(format = "yyyy-MM-dd")
     private Date sendtime;
 	private  Integer price;
+	private Integer positionid;
+	
+	
+	public Integer getPositionid() {
+		return positionid;
+	}
+	public void setPositionid(Integer positionid) {
+		this.positionid = positionid;
+	}
+	public String getStaffpwd() {
+		return staffpwd;
+	}
+	public void setStaffpwd(String staffpwd) {
+		this.staffpwd = staffpwd;
+	}
+	public String getIdcd() {
+		return idcd;
+	}
+	public void setIdcd(String idcd) {
+		this.idcd = idcd;
+	}
 	public Integer getStaffid() {
 		return staffid;
 	}

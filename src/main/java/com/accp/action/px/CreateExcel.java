@@ -35,20 +35,25 @@ import jxl.write.WritableWorkbook;
 		private PxBiz pbiz;
  
 	
-	     @GetMapping("{staffname}/{pageNum}/{pageSize}")
-	 	public Map<String, Object> daochukhzl(@PathVariable String staffname,@PathVariable Integer pageNum, @PathVariable Integer pageSize) {
+	     @GetMapping("{staffname}/{pageNum}/{pageSize}/{departmentname}/{positionname}")
+	 	public Map<String, Object> daochukhzl(@PathVariable String staffname,@PathVariable Integer pageNum, @PathVariable Integer pageSize,@PathVariable String departmentname,@PathVariable String positionname) {
 	    	 if("null".equals(staffname)) {
 	 			staffname=null;
 	 		}
+	    	 if("null".equals(departmentname)) {
+	 			departmentname=null;
+	 		}
+	 		if("null".equals(positionname)) {
+	 			positionname=null;
+	 		}
 	 		Map<String, Object> message = new HashMap<String, Object>();
-	 		 List<PX> p=pbiz.queryall(staffname, pageNum, pageSize).getList();
+	 		 List<PX> p=pbiz.queryall(staffname, pageNum, pageSize, departmentname, positionname).getList();
 	 		List<String[]> data = new ArrayList<String[]>();
 	 		for(int i=0;i<p.size();i++) {
 	 			
 	 			data.add(new String[] {
-					    String.valueOf(p.get(i).getStaffid()), 
-	 					String.valueOf(p.get(i).getDepartmentname()),
-	 					String.valueOf(p.get(i).getPositionname()),
+					   
+	 				
 	 					String.valueOf(p.get(i).getStaffname()),
 	 					String.valueOf(p.get(i).getStaffsex()),
 	 					String.valueOf(p.get(i).getSaddress()),
@@ -92,13 +97,10 @@ import jxl.write.WritableWorkbook;
 	 				columnIndex = 0;
 	 				wsheet.setRowView(rowIndex, 500);// 设置标题行高
 	 				wsheet.addCell(new Label(columnIndex++, rowIndex, fileName, wcf));
-	 				wsheet.mergeCells(0, rowIndex,  9, rowIndex);// 合并标题所占单元格
+	 				wsheet.mergeCells(0, rowIndex,  6, rowIndex);// 合并标题所占单元格
 	 				rowIndex++;
 	 				columnIndex = 0;
 	 				wsheet.setRowView(rowIndex, 380);// 设置项目名行高
-	 				wsheet.addCell(new Label(columnIndex++, rowIndex, "用户编号", wcf));
-	 				wsheet.addCell(new Label(columnIndex++, rowIndex, "部门", wcf));
-	 				wsheet.addCell(new Label(columnIndex++, rowIndex, "职位", wcf));
 	 				wsheet.addCell(new Label(columnIndex++, rowIndex, "姓名", wcf));
 	 				wsheet.addCell(new Label(columnIndex++, rowIndex, "性别", wcf));
 	 				wsheet.addCell(new Label(columnIndex++, rowIndex, "地址", wcf));
@@ -109,7 +111,7 @@ import jxl.write.WritableWorkbook;
 	 				for (String[] array : data) { // 循环列
 	 					rowIndex++;
 	 					columnIndex = 0;
-	 					for(int j=0;j<9;j++) {
+	 					for(int j=0;j<6;j++) {
 	 						wsheet.addCell(new Label(columnIndex++, rowIndex, array[j],wcfe));
 	 					}
 	 				}

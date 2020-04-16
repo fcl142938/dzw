@@ -9,6 +9,12 @@ FROM `department` AS d,`position` AS p,`staff` AS s
   d.`departmentid`=p.`departmentid` AND s.`positionid`=p.`positionid`
    <if test="staffname!=null">
    and   `staffname` like '%${staffname}%' 
+</if> 
+ <if test="departmentname!=null">
+   and   `departmentname` =#{departmentname} 
+</if> 
+ <if test="positionname!=null">
+   and   `positionname` =#{positionname} 
 </if>  
 and s.state=0
 </where>
@@ -42,6 +48,17 @@ and s.state=1
      <update id="updatestaffinfo">
    update staff set sendtime=null,state=0 where staffname=#{staffname}
    </update>
+   
+   <select id="selectbystaffid" resultType="com.accp.vo.px.PX">
+     SELECT  s.`staffid`,d.`departmentname`,p.`positionname`,s.positionid,
+s.`staffname`,s.`staffsex`,s.`saddress`,s.`sstarttime`,s.`staffaccount`,s.staffpwd,s.idcd,s.`price` 
+FROM `department` AS d,`position` AS p,`staff` AS s where  d.`departmentid`=p.`departmentid` AND s.`positionid`=p.`positionid`
+and s.`staffid`=#{staffid}
+   </select>
+   
+   <select id="selectposition" resultType="com.accp.pojo.Position">
+   select * from position
+   </select>
 
 
 </mapper>
