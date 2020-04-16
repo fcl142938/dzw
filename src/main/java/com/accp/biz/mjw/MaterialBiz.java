@@ -43,7 +43,7 @@ public class MaterialBiz {
 		qw.eq("mladdress",mladdress);
 		
 		return new PageInfo<Material>(dao.selectList(qw));
-	} 
+	}  
 	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, readOnly = false)
 	public int insertOne(Material entity) {
 		return dao.insert(entity);
