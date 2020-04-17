@@ -64,6 +64,7 @@ public class FclServicingmainAction {
 	@GetMapping("queryShow")
 	public List<FclServicingmainVo> queryShow(){
 		return biz.queryShow();
+		
 	}
 	
 	@GetMapping("queryShowData")

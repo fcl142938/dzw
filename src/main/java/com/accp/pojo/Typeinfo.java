@@ -15,8 +15,19 @@ public class Typeinfo {
     private Long price;
 
     private String infomark;
+    
+    private Double infotime;
+   
 
-    public Integer getInfoid() {
+    public Double getInfotime() {
+		return infotime;
+	}
+
+	public void setInfotime(Double infotime) {
+		this.infotime = infotime;
+	}
+
+	public Integer getInfoid() {
         return infoid;
     } 
 

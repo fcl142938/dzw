@@ -16,6 +16,17 @@ public class Servicinginfo {
     private String infomark;
     private Integer courseid;
     
+    private Double infotime;
+    
+
+    public Double getInfotime() {
+		return infotime;
+	}
+
+	public void setInfotime(Double infotime) {
+		this.infotime = infotime;
+	}
+    
     
 
     public Integer getCourseid() {
