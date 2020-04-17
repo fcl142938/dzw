@@ -162,7 +162,7 @@ public class LyfAction {
 	}
 	@GetMapping("xuanzhongchechakehu/{userid}")
 	public List<Consumerinfo> khzlid(@PathVariable String userid) {
-		return lyfkhzlbiz.khzl(userid);
+		return lyfkhzlbiz.khzlid(userid);
 	}
 	@GetMapping("cxdaqcpp")
 	public List<Carbrand> cxdaqcpp() {
