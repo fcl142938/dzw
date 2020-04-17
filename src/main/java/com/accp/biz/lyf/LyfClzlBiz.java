@@ -35,10 +35,11 @@ public class LyfClzlBiz {
 	public int shanchukehuche(Integer userid) {
 		return lyfclzldao.deleteById(userid);
 	}
-	public List<LyfClzlVo> chelianziliao() {
-		return lyfclzldao.chelianziliao();
-	}
 	public List<LyfClzlVo> chachepai(String chepai) {
-		return lyfclzldao.chachepai(chepai);
+		if(chepai.equals("null")) {
+			return lyfclzldao.chelianziliao();
+		}else {
+			return lyfclzldao.chachepai(chepai);
+		}
 	}
 }

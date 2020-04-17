@@ -18,8 +18,14 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 public class LyfKhzlBiz {
 	@Autowired
 	private LyfKhzlDao lyfkhzldao;
-	public List<Consumerinfo> khzl() {
-		return lyfkhzldao.selectList(null);
+	public List<Consumerinfo> khzl(String tiaojian) {
+		if(tiaojian.equals("null")) {
+			return lyfkhzldao.selectList(null);
+		}else {
+			QueryWrapper<Consumerinfo> qw=Wrappers.query();
+			qw.like("userid",tiaojian).or().like("username", tiaojian).or().like("userphone",tiaojian);
+			return lyfkhzldao.selectList(qw);
+		}
 	}
 	public int addkehu(Consumerinfo kehu) {
 		return lyfkhzldao.insert(kehu);
@@ -30,7 +36,7 @@ public class LyfKhzlBiz {
 	public int shanchukehu(String userid) {
 		return lyfkhzldao.deleteById(userid);
 	}
-	public List<Consumerinfo> khzl(String userid) {
+	public List<Consumerinfo> khzlid(String userid) {
 		QueryWrapper<Consumerinfo> qw=Wrappers.query();
 		qw.eq("userid", userid);
 		return lyfkhzldao.selectList(qw);

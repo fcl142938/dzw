@@ -11,6 +11,6 @@
   </select>
   <select id="chachepai" resultType="com.accp.vo.lyf.LyfClzlVo">
   	SELECT che.userid,che.`consumerid`,che.`carnumber`,pinpai.`brandname`,chexing.`motorcyclename`,che.`drivername`,che.`driverphone`,che.`driverbrithday`,fadongji.`motorletter`,fadongji.`motorname` FROM `consumercar` AS che,`carbrand` AS pinpai,`motorbrand` AS fadongji,`motorcycle` AS chexing
-	WHERE che.`motorcycleid`=chexing.`motorcycleid` AND chexing.`brandid`=pinpai.`brandid` AND chexing.`motorid`=fadongji.`motorid` AND che.carnumber=#{chepai}
+	WHERE che.`motorcycleid`=chexing.`motorcycleid` AND chexing.`brandid`=pinpai.`brandid` AND chexing.`motorid`=fadongji.`motorid` AND che.consumerid like '%${chepai}%' OR che.`carnumber` like '%${chepai}%' OR che.`drivername` like '%${chepai}%' OR che.`driverphone` like '%${chepai}%' GROUP BY che.consumerid
   </select>
 </mapper>

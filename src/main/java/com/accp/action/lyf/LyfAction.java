@@ -54,9 +54,9 @@ public class LyfAction {
 	private LyfCheliangpinpaiBiz lyfcheliangpinpaibiz;
 	@Autowired
 	private LyfChexingBiz lyfchexingbiz;
-	@GetMapping()
-	public List<Consumerinfo> khzl() {
-		return lyfkhzlbiz.khzl();
+	@GetMapping("{tiaojian}")
+	public List<Consumerinfo> khzl(@PathVariable String tiaojian) {
+		return lyfkhzlbiz.khzl(tiaojian);
 	}
 	@GetMapping("xuanzhongconsumerinfochache/{userid}")
 	public List<LyfClzlVo> clzl(@PathVariable String userid) {
@@ -156,17 +156,13 @@ public class LyfAction {
 		}
 		return message;
 	}
-	@GetMapping("clzl")
-	public List<LyfClzlVo> clzl() {
-		return lyfclzlbiz.chelianziliao();
-	}
-	@GetMapping("xuanzhongchechakehu/{userid}")
-	public List<Consumerinfo> khzl(@PathVariable String userid) {
-		return lyfkhzlbiz.khzl(userid);
-	}
-	@GetMapping("chachepai/{chepai}")
+	@GetMapping("clzl/{chepai}")
 	public List<LyfClzlVo> chachepai(@PathVariable String chepai) {
 		return lyfclzlbiz.chachepai(chepai);
+	}
+	@GetMapping("xuanzhongchechakehu/{userid}")
+	public List<Consumerinfo> khzlid(@PathVariable String userid) {
+		return lyfkhzlbiz.khzl(userid);
 	}
 	@GetMapping("cxdaqcpp")
 	public List<Carbrand> cxdaqcpp() {
@@ -256,7 +252,7 @@ public class LyfAction {
 	@GetMapping("daochukhzl")
 	public Map<String, Object> daochukhzl() {
 		Map<String, Object> message = new HashMap<String, Object>();
-		List<Consumerinfo> kehuziliao=lyfkhzlbiz.khzl();
+		List<Consumerinfo> kehuziliao=lyfkhzlbiz.khzl(null);
 		List<String[]> data = new ArrayList<String[]>();
 		for(int i=0;i<kehuziliao.size();i++) {
 			data.add(new String[] {
