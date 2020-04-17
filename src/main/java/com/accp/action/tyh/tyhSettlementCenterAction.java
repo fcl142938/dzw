@@ -9,12 +9,14 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accp.biz.tyh.tyhSettlementCenterBiz;
+import com.accp.pojo.Memberinfo;
 import com.accp.vo.tyh.SettlementCenter;
 import com.accp.vo.tyh.tyhParticulars;
 
@@ -76,6 +78,41 @@ public class tyhSettlementCenterAction {
 		}
 		return message;
 	}
+	
+	/**
+	 * 新增会员消费记录
+	 * @param m
+	 * @return
+	 */
+	@PostMapping("/tyhInsertByJl")
+	public Map<String, Object> tyhInsertByJl(@RequestBody Memberinfo m) {
+		Map<String, Object> message = new HashMap<String, Object>();
+		if(biz.tyhInsertByJl(m) > 0) {
+			message.put("code", "200");
+		} else {
+			message.put("code", "500");
+		}
+		return message;
+	}
+	
+	/**
+	 * 登录会员
+	 * @param membername
+	 * @param memberpwd
+	 * @return
+	 */
+	@GetMapping("/tyhloginHy/{membername}/{memberpwd}")
+	public Map<String, Object> tyhloginHy(@PathVariable String membername,@PathVariable String memberpwd) {
+		System.out.println(membername+memberpwd);
+		Map<String, Object> message = new HashMap<String, Object>();
+		if(biz.tyhloginHy(membername, memberpwd) != null) {
+			message.put("code", "200");
+		} else {
+			message.put("code", "500");
+		}
+		return message;
+	}
+
 	
 	/**
 	 * 收银

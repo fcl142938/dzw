@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.accp.dao.tyh.tyhISettlementCenterDAO;
+import com.accp.pojo.Member;
+import com.accp.pojo.Memberinfo;
 import com.accp.vo.tyh.SettlementCenter;
 import com.accp.vo.tyh.tyhParticulars;
 
@@ -40,6 +42,16 @@ public class tyhSettlementCenterBiz {
 	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, readOnly = false)
 	public int tyhupdateByHgSettlementCenter(Integer smid) {
 		return dao.tyhupdateByHgSettlementCenter(smid);
+	}
+	
+	//新增会员消费记录
+	public int tyhInsertByJl(Memberinfo m) {
+		return dao.tyhInsertByJl(m);
+	}
+	
+	//登录会员
+	public Member tyhloginHy(String membername,String memberpwd) {
+		return dao.tyhloginHy(membername, memberpwd);
 	}
 	
 	//收银
