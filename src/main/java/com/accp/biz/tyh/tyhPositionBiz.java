@@ -1,5 +1,7 @@
 package com.accp.biz.tyh;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.accp.dao.tyh.tyhIpositionDAO;
+import com.accp.pojo.Department;
 import com.accp.pojo.Position;
 import com.accp.vo.tyh.PositionAndDepartment;
 import com.github.pagehelper.PageHelper;
@@ -19,6 +22,11 @@ public class tyhPositionBiz {
 	
 	@Autowired
 	private tyhIpositionDAO dao;
+	
+	/* 查询部门 */
+	public List<Department> tyhQueryByDepartment(){
+		return dao.tyhQueryByDepartment();
+	}
 	
 	/* 删除岗位 */
 	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, readOnly = false)
@@ -39,7 +47,7 @@ public class tyhPositionBiz {
 	}
 	
 	/* 根据岗位ID查询岗位ID是否存在 */
-	public int tyhQueryByPositionId(Integer positionid) {
+	public Position tyhQueryByPositionId(Integer positionid) {
 		return dao.tyhQueryByPositionId(positionid);
 	}
 

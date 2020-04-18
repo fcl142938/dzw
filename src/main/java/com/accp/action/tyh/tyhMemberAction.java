@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accp.biz.tyh.tyhMemberBiz;
+import com.accp.pojo.Grade;
 import com.accp.pojo.Member;
+import com.accp.vo.tyh.Members;
 import com.github.pagehelper.PageInfo;
 
 @RestController
@@ -23,6 +25,15 @@ public class tyhMemberAction {
 	
 	@Autowired
 	private tyhMemberBiz biz;
+	
+	/**
+	 *  查询会员等级 
+	 * @return
+	 */
+	@GetMapping("/tyhQueryByGrade")
+	public List<Grade> tyhQueryByGrade(){
+		return biz.tyhQueryByGrade();
+	}
 	
 	/**
 	 * 新增会员
@@ -48,7 +59,7 @@ public class tyhMemberAction {
 	 * @return
 	 */
 	@GetMapping("/{pageNum}/{pageSize}")
-	public PageInfo<Member> tyhQueryByMember(@PathVariable Integer pageNum, @PathVariable Integer pageSize){
+	public PageInfo<Members> tyhQueryByMember(@PathVariable Integer pageNum, @PathVariable Integer pageSize){
 		return biz.tyhQueryByMember(pageNum, pageSize);
 	}
 

@@ -1,6 +1,7 @@
 package com.accp.action.tyh;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accp.biz.tyh.tyhPositionBiz;
+import com.accp.pojo.Department;
 import com.accp.pojo.Position;
 import com.accp.vo.tyh.PositionAndDepartment;
 import com.github.pagehelper.PageInfo;
@@ -25,6 +27,15 @@ public class tyhPositionAction {
 	
 	@Autowired
 	private tyhPositionBiz biz;
+	
+	/**
+	 *  查询部门 
+	 * @return
+	 */
+	@GetMapping("/tyhQueryByDepartment")
+	public List<Department> tyhQueryByDepartment(){
+		return biz.tyhQueryByDepartment();
+	}
 	
 	/**
 	 *  删除岗位 
@@ -77,8 +88,7 @@ public class tyhPositionAction {
 	@GetMapping("/tyhQueryByPositionId/{positionid}")
 	public Map<String, Object> tyhQueryByPositionId(@PathVariable Integer positionid) {
 		Map<String, Object> message = new HashMap<String, Object>();
-		int i = biz.tyhQueryByPositionId(positionid);
-		if(i > 0) {
+		if(biz.tyhQueryByPositionId(positionid) != null) {
 			message.put("code", "200");
 		} else {
 			message.put("code", "500");

@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accp.biz.tyh.tyhSettlementCenterBiz;
+import com.accp.pojo.Member;
 import com.accp.pojo.Memberinfo;
+import com.accp.vo.tyh.MemberInfos;
 import com.accp.vo.tyh.SettlementCenter;
 import com.accp.vo.tyh.tyhParticulars;
 
@@ -85,14 +87,25 @@ public class tyhSettlementCenterAction {
 	 * @return
 	 */
 	@PostMapping("/tyhInsertByJl")
-	public Map<String, Object> tyhInsertByJl(@RequestBody Memberinfo m) {
+	public Map<String, Object> tyhInsertByJl(@RequestBody MemberInfos m) {
 		Map<String, Object> message = new HashMap<String, Object>();
+		System.out.println(m);
 		if(biz.tyhInsertByJl(m) > 0) {
 			message.put("code", "200");
 		} else {
 			message.put("code", "500");
 		}
 		return message;
+	}
+	
+	/**
+	 * 根据登录会员查询ID
+	 * @param membername
+	 * @return
+	 */
+	@GetMapping("/tyhQueryByHyName/{membername}")
+	public Member tyhQueryByHyName(@PathVariable String membername) {
+		return biz.tyhQueryByHyName(membername);
 	}
 	
 	/**

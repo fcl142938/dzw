@@ -2,6 +2,7 @@ package com.accp.pojo;
 
 import java.util.Date;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 
@@ -11,7 +12,7 @@ public class Memberinfo {
     private Integer mid;
 
     private Integer memberid;
-
+    
     private Date medate;
 
     private Long makeintegral;

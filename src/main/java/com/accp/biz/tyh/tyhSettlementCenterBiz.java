@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.accp.dao.tyh.tyhISettlementCenterDAO;
 import com.accp.pojo.Member;
 import com.accp.pojo.Memberinfo;
+import com.accp.vo.tyh.MemberInfos;
 import com.accp.vo.tyh.SettlementCenter;
 import com.accp.vo.tyh.tyhParticulars;
 
@@ -45,8 +46,14 @@ public class tyhSettlementCenterBiz {
 	}
 	
 	//新增会员消费记录
-	public int tyhInsertByJl(Memberinfo m) {
+	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, readOnly = false)
+	public int tyhInsertByJl(MemberInfos m) {
 		return dao.tyhInsertByJl(m);
+	}
+	
+	//根据登录会员查询ID
+	public Member tyhQueryByHyName(String membername) {
+		return dao.tyhQueryByHyName(membername);
 	}
 	
 	//登录会员

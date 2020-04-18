@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.accp.pojo.Member;
 import com.accp.pojo.Memberinfo;
+import com.accp.vo.tyh.MemberInfos;
 import com.accp.vo.tyh.SettlementCenter;
 import com.accp.vo.tyh.tyhParticulars;
 
@@ -25,10 +26,13 @@ public interface tyhISettlementCenterDAO {
 	int tyhupdateByHgSettlementCenter(@Param("smid") Integer smid);
 	
 	//新增会员消费记录
-	int tyhInsertByJl(@Param("m") Memberinfo m);
+	int tyhInsertByJl(@Param("m") MemberInfos m);
 	
 	//查询会员剩余金额
 	//Member tyhQueryBySyje(@Param("memberid") Integer memberid);
+	
+	//根据登录会员查询ID
+	Member tyhQueryByHyName(@Param("membername") String membername);
 	
 	//登录会员/查询会员剩余金额
 	Member tyhloginHy(@Param("membername") String membername,@Param("memberpwd") String memberpwd);

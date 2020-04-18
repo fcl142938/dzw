@@ -3,6 +3,11 @@
 
 <mapper namespace="com.accp.dao.tyh.tyhIpositionDAO">
 
+	<!-- 查询部门 -->
+	<select id="tyhQueryByDepartment" resultType="Department">
+		select * from Department
+	</select>
+
 	<!-- 删除岗位 -->
 	<delete id="tyhDelPositionById">
 		delete from Position

@@ -3,6 +3,11 @@
 
 <mapper namespace="com.accp.dao.tyh.tyhIMemberDAO">
 
+	<!-- 查询会员等级 -->
+	<select id="tyhQueryByGrade" resultType="Grade">
+		select * from Grade
+	</select>
+
 	<!-- 新增会员 -->
 	<insert id="tyhInsertByMember">
 		INSERT INTO `member`(memberid,gradeid,membername,memberpwd,money,starttime)
@@ -10,8 +15,10 @@
 	</insert>
 
 	<!-- 查询会员 -->
-	<select id="tyhQueryByMember" resultType="Member">
-		SELECT * FROM `member`
+	<select id="tyhQueryByMember" resultType="Members">
+		SELECT * FROM `member` AS m
+		INNER JOIN `grade` AS g
+		ON m.`gradeid` = g.`gradeid`
 	</select>
 
 </mapper>

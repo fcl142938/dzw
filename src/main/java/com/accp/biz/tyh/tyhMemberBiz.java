@@ -10,7 +10,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.accp.dao.tyh.tyhIMemberDAO;
+import com.accp.pojo.Grade;
 import com.accp.pojo.Member;
+import com.accp.vo.tyh.Members;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
@@ -21,6 +23,11 @@ public class tyhMemberBiz {
 	@Autowired
 	private tyhIMemberDAO dao;
 	
+	/* 查询会员等级 */
+	public List<Grade> tyhQueryByGrade(){
+		return dao.tyhQueryByGrade();
+	}
+	
 	/* 新增会员 */
 	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, readOnly = false)
 	public int tyhInsertByMember(Member m) {
@@ -28,9 +35,9 @@ public class tyhMemberBiz {
 	}
 	
 	/* 查询会员 */
-	public PageInfo<Member> tyhQueryByMember(Integer pageNum, Integer pageSize){
+	public PageInfo<Members> tyhQueryByMember(Integer pageNum, Integer pageSize){
 		PageHelper.startPage(pageNum, pageSize);
-		return new PageInfo<Member>(dao.tyhQueryByMember());
+		return new PageInfo<Members>(dao.tyhQueryByMember());
 	}
 
 }

@@ -55,12 +55,24 @@
 
 	<!-- 多条件查看 -->
 	<select id="queryByMaxSettlementCenter" resultType="SettlementCenter">
-		SELECT s.`smid`,s.`state`,s.`starttime`,s.`entime`,s.`staffid`,sf.`staffname`,s.`price`,c.`username`,cr.`carnumber`,m.`motorcyclename`,sf.`price` AS sfprice,c.`userremark` 
+		<!-- SELECT s.`smid`,s.`state`,s.`starttime`,s.`entime`,s.`staffid`,sf.`staffname`,s.`price`,c.`username`,cr.`carnumber`,m.`motorcyclename`,sf.`price` AS sfprice,c.`userremark` 
 		FROM `servicingmain` AS s
 		INNER JOIN `artificergrow` AS a
 		ON s.`gid` = a.`gid`
 		INNER JOIN `consumerinfo` AS c
 		ON s.`userid` = c.`userid`
+		INNER JOIN `staff` AS sf
+		ON s.`staffid` = sf.`staffid`
+		INNER JOIN `consumercar` AS cr
+		ON s.`consumerid` = cr.`consumerid`
+		INNER JOIN `motorcycle` AS m
+		ON cr.`motorcycleid` = m.`motorcycleid`
+		INNER JOIN `rescuecar` AS r
+		ON s.`rescueid` = r.`rescueid` -->
+		SELECT s.`smid`,s.`state`,s.`starttime`,s.`entime`,s.`staffid`,sf.`staffname`,s.`price`,cr.`carnumber`,m.`motorcyclename`,sf.`price` AS sfprice
+		 FROM `servicingmain` AS s
+		INNER JOIN `artificergrow` AS a
+		ON s.`gid` = a.`gid`
 		INNER JOIN `staff` AS sf
 		ON s.`staffid` = sf.`staffid`
 		INNER JOIN `consumercar` AS cr
@@ -90,8 +102,14 @@
 	<!-- 新增会员消费记录 -->
 	<insert id="tyhInsertByJl">
 		INSERT INTO `memberinfo`(`mid`,`memberid`,`medate`,`makeintegral`,`makemoney`,`state`,`smid`)
-		VALUE(#{mid},#{memberid},#{medate},#{makeintegral}/100,#{makemoney},#{state},#{smid})
+		VALUE(0,#{m.memberid},#{m.medate},#{m.makeintegral}/100,#{m.makemoney},1,#{m.smid});
 	</insert>
+	
+	<!-- 根据登录会员查询ID -->
+	<select id="tyhQueryByHyName" resultType="Member">
+		select * from Member
+		where membername = #{membername}
+	</select>
 	
 	<!-- 登录会员 -->
 	<select id="tyhloginHy" resultType="Member">
@@ -119,6 +137,7 @@
 	ON cr.`motorcycleid` = m.`motorcycleid`
 	INNER JOIN `rescuecar` AS r
 	ON s.`rescueid` = r.`rescueid`
+	where s.`state` = 3
 		<!-- SELECT s.`smid`,s.`state`,s.`starttime`,s.`entime`,s.`staffid`,sf.`staffname`,s.`price`,c.`username`,cr.`carnumber`,m.`motorcyclename`,sf.`price` AS sfprice,c.`userremark` 
 		FROM `servicingmain` AS s
 		INNER JOIN `artificergrow` AS a
