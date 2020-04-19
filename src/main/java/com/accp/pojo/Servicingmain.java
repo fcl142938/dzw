@@ -31,8 +31,19 @@ public class Servicingmain {
     private Double price;
 
     private Integer state;
+    
+    private Double counttime  ;
+    
 
-    public String getSmid() {
+    public Double getCounttime() {
+		return counttime;
+	}
+
+	public void setCounttime(Double counttime) {
+		this.counttime = counttime;
+	}
+
+	public String getSmid() {
         return smid;
     }
 

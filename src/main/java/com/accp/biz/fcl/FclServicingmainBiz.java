@@ -128,6 +128,7 @@ public class FclServicingmainBiz {
 		vo.getSer().setStarttime(new Date());
 		vo.getSer().setSmid(smid);
 		vo.getSer().setState(0);
+		//后台计算总价格
 		Double countprice = 0.0;
 		for (Servicinginfo obj : vo.getList()) {
 			obj.setSmid(smid);
