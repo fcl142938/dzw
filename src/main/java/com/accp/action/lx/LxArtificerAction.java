@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.accp.biz.lx.LxArtificerBiz;
 import com.accp.pojo.Artificer;
+import com.accp.pojo.Artificergrow;
 import com.github.pagehelper.PageInfo;
 
 @RestController
@@ -38,9 +39,19 @@ public class LxArtificerAction {
 	 * @param bid班组编码
 	 * @return
 	 */
-	@GetMapping("queryBanzujgByBid/{sid}")
-	public Artificer queryStarBySid(@PathVariable int sid) {
-		return biz.queryStarBySid(sid);
+	@GetMapping("queryBanzujgByBid/{sid}/{n}/{s}")
+	public PageInfo<Artificer> queryBanzujgByBid(@PathVariable Integer sid,@PathVariable Integer n,@PathVariable Integer s) {
+		System.out.println("nnn"+n+"sss"+s);
+		return biz.queryStarBySid(sid,n,s);
+	}
+	/**
+	 * 根据班组编码查询班组信息
+	 * @param bid班组编码
+	 * @return
+	 */
+	@GetMapping("queryid/{bzid}")
+	public Artificer queryStarBySid(@PathVariable int bzid) {
+		return biz.queryStarBySid(bzid);
 	}
 	/**
 	 * 新增班组

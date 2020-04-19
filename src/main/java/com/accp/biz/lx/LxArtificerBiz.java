@@ -36,6 +36,19 @@ public class LxArtificerBiz {
 	 * 根据id查看信息
 	 * @return
 	 */
+	public PageInfo<Artificer> queryStarBySid(Integer sid,Integer n ,Integer s) {
+		PageHelper.startPage(n,s);
+		QueryWrapper<Artificer> qw=Wrappers.query();
+		qw.eq("gid", sid);
+		List<Artificer> list = jgdao.selectList(qw);
+		PageInfo<Artificer> pageInfo=new PageInfo<Artificer>(list);
+		System.out.println(pageInfo);
+		return pageInfo;
+	}
+	/**
+	 * 根据id查看信息
+	 * @return
+	 */
 	public Artificer queryStarBySid(int sid) {
 		QueryWrapper<Artificer> qw=Wrappers.query();
 		qw.eq("gid", sid);
