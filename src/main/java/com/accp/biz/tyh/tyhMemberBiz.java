@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.accp.dao.tyh.tyhIMemberDAO;
 import com.accp.pojo.Grade;
@@ -24,6 +25,26 @@ public class tyhMemberBiz {
 	
 	@Autowired
 	private tyhIMemberDAO dao;
+	
+	/* 会员充值 */
+	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, readOnly = false)
+	public int tyhUpdateByCz(Member m) {
+		return dao.tyhUpdateByCz(m);
+	}
+	
+	/* 删除会员 */
+	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, readOnly = false)
+	public int tyhDelByMember(Integer memberid) {
+		return dao.tyhDelByMember(memberid);
+	}
+	
+	/* 修改会员 */
+	/*
+	 * @Transactional(propagation = Propagation.REQUIRED, isolation =
+	 * Isolation.READ_COMMITTED, readOnly = false) public int
+	 * tyhUpdateByMember(String membername, String memberpwd) { return
+	 * dao.tyhUpdateByMember(membername, memberpwd); }
+	 */
 	
 	/* 根据会员ID查询会员消费记录 */
 	public List<tyhMemberInfo> tyhQueryByMemberinfo(Integer memberid){

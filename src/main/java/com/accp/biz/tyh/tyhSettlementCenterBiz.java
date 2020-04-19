@@ -45,6 +45,18 @@ public class tyhSettlementCenterBiz {
 		return dao.tyhupdateByHgSettlementCenter(smid);
 	}
 	
+	//修改会员消费金额/余额
+	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, readOnly = false)
+	public int tyhUpdateByMoIntegral(Memberinfo mo) {
+		return dao.tyhUpdateByMoIntegral(mo);
+	}
+	
+	//修改会员积分/余额
+	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, readOnly = false)
+	public int tyhUpdateByMIntegral(Member m) {
+		return dao.tyhUpdateByMIntegral(m);
+	}
+	
 	//新增会员消费记录
 	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, readOnly = false)
 	public int tyhInsertByJl(MemberInfos m) {

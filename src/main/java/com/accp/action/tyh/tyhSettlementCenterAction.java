@@ -82,6 +82,38 @@ public class tyhSettlementCenterAction {
 	}
 	
 	/**
+	 * 修改会员消费金额/余额
+	 * @param mo
+	 * @return
+	 */
+	@PutMapping("/tyhUpdateByMoIntegral")
+	public Map<String, Object> tyhUpdateByMoIntegral(@RequestBody Memberinfo mo) {
+		Map<String, Object> message = new HashMap<String, Object>();
+		if(biz.tyhUpdateByMoIntegral(mo) > 0) {
+			message.put("code", "200");
+		} else {
+			message.put("code", "500");
+		}
+		return message;
+	}
+	
+	/**
+	 * 修改会员积分/余额
+	 * @param memberid
+	 * @return
+	 */
+	@PutMapping("/tyhUpdateByMIntegral")
+	public Map<String, Object> tyhUpdateByMIntegral(@RequestBody Member m) {
+		Map<String, Object> message = new HashMap<String, Object>();
+		if(biz.tyhUpdateByMIntegral(m) > 0) {
+			message.put("code", "200");
+		} else {
+			message.put("code", "500");
+		}
+		return message;
+	}
+	
+	/**
 	 * 新增会员消费记录
 	 * @param m
 	 * @return

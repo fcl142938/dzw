@@ -13,8 +13,6 @@ import com.accp.vo.tyh.tyhParticulars;
 
 public interface tyhISettlementCenterDAO {
 	
-	//
-	
 	/* 维修项目 */
 	List<tyhParticulars> tyhQueryByXm(@Param("infoid") Integer infoid);
 	
@@ -26,6 +24,13 @@ public interface tyhISettlementCenterDAO {
 	
 	//回滚
 	int tyhupdateByHgSettlementCenter(@Param("smid") Integer smid);
+	
+	//修改会员消费金额/余额
+	int tyhUpdateByMoIntegral(@Param("mo") Memberinfo mo);
+	
+	//修改会员积分/余额
+	int tyhUpdateByMIntegral(@Param("m") Member m);
+	
 	
 	//新增会员消费记录
 	int tyhInsertByJl(@Param("m") MemberInfos m);

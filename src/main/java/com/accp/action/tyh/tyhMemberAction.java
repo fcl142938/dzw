@@ -6,9 +6,11 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +29,51 @@ public class tyhMemberAction {
 	
 	@Autowired
 	private tyhMemberBiz biz;
+	
+	/**
+	 *  会员充值 
+	 * @param m
+	 * @return
+	 */
+	@PutMapping("/tyhUpdateByCz")
+	public Map<String, Object> tyhUpdateByCz(@RequestBody Member m) {
+		Map<String, Object> message = new HashMap<String, Object>();
+		if(biz.tyhUpdateByCz(m) > 0) {
+			message.put("code", "200");
+		} else {
+			message.put("code", "500");
+		}
+		return message;
+	}
+	
+	/**
+	 *  删除会员 
+	 * @param memberid
+	 * @return
+	 */
+	@DeleteMapping("/tyhDelByMember/{memberid}")
+	public Map<String, Object> tyhDelByMember(@PathVariable Integer memberid) {
+		Map<String, Object> message = new HashMap<String, Object>();
+		if(biz.tyhDelByMember(memberid) > 0) {
+			message.put("code", "200");
+		} else {
+			message.put("code", "500");
+		}
+		return message;
+	}
+	
+	/**
+	 *  修改会员 
+	 * @param m
+	 * @return
+	 */
+	/*
+	 * @PutMapping("/tyhUpdateByMember") public Map<String, Object>
+	 * tyhUpdateByMember(@RequestBody String membername,@RequestBody String
+	 * memberpwd) { Map<String, Object> message = new HashMap<String, Object>();
+	 * if(biz.tyhUpdateByMember(membername, memberpwd) > 0) { message.put("code",
+	 * "200"); } else { message.put("code", "500"); } return message; }
+	 */
 	
 	/**
 	 *  根据会员ID查询会员消费记录

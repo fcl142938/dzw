@@ -3,11 +3,30 @@
 
 <mapper namespace="com.accp.dao.tyh.tyhIMemberDAO">
 
+	<!-- 充值 -->
+	<update id="tyhUpdateByCz">
+		update member set memberintegrate = #{m.memberintegrate}/100 + memberintegrate,countintegrate = #{m.memberintegrate}/100 + countintegrate,money = #{m.money} + money
+		where memberid = #{m.memberid}
+	</update>
+
+	 <!-- 删除会员 -->
+	<delete id="tyhDelByMember">
+		delete from member
+		where memberid = #{memberid}
+	</delete>
+
+	<!-- 修改会员密码 -->
+	<!-- <update id="tyhUpdateByMember">
+		update member set memberpwd = #{memberpwd}
+		where membername = #{membername}
+	</update> -->
+
 	<!-- 根据会员ID查询会员消费记录 -->
 	<select id="tyhQueryByMemberinfo" resultType="tyhMemberInfo">
 		SELECT * FROM `memberinfo` AS mo
 		INNER JOIN `member` AS m
 		ON mo.`memberid` = m.`memberid`
+		where mo.`memberid` = #{memberid}
 	</select>
 
 	<!-- 查询会员等级 -->
