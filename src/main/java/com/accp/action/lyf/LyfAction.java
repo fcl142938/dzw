@@ -20,6 +20,7 @@ import com.accp.biz.lyf.LyfCheliangpinpaiBiz;
 import com.accp.biz.lyf.LyfChexingBiz;
 import com.accp.biz.lyf.LyfClzlBiz;
 import com.accp.biz.lyf.LyfKhzlBiz;
+import com.accp.biz.lyf.LyfServicingmainBiz;
 import com.accp.biz.lyf.LyfShengBiz;
 import com.accp.biz.lyf.LyfShiquBiz;
 import com.accp.pojo.Addressinfo;
@@ -28,7 +29,9 @@ import com.accp.pojo.Consumercar;
 import com.accp.pojo.Consumerinfo;
 import com.accp.pojo.Motorcycle;
 import com.accp.pojo.Province;
+import com.accp.pojo.Servicingmain;
 import com.accp.vo.lyf.LyfClzlVo;
+import com.accp.vo.lyf.LyfWxjlVo;
 
 import jxl.Workbook;
 import jxl.format.Alignment;
@@ -54,6 +57,8 @@ public class LyfAction {
 	private LyfCheliangpinpaiBiz lyfcheliangpinpaibiz;
 	@Autowired
 	private LyfChexingBiz lyfchexingbiz;
+	@Autowired
+	private LyfServicingmainBiz lyfservicingmainbiz;
 	@GetMapping("{tiaojian}")
 	public List<Consumerinfo> khzl(@PathVariable String tiaojian) {
 		return lyfkhzlbiz.khzl(tiaojian);
@@ -160,9 +165,9 @@ public class LyfAction {
 	public List<LyfClzlVo> chachepai(@PathVariable String chepai) {
 		return lyfclzlbiz.chachepai(chepai);
 	}
-	@GetMapping("xuanzhongchechakehu/{userid}")
-	public List<Consumerinfo> khzlid(@PathVariable String userid) {
-		return lyfkhzlbiz.khzlid(userid);
+	@GetMapping("xuanzhongchechajilu/{consumerid}")
+	public List<LyfWxjlVo> wxjl(@PathVariable Integer consumerid) {
+		return lyfservicingmainbiz.wxjl(consumerid);
 	}
 	@GetMapping("cxdaqcpp")
 	public List<Carbrand> cxdaqcpp() {
