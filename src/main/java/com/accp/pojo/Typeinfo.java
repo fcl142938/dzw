@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 
 public class Typeinfo {
 	
-	@TableId(type = IdType.INPUT,value = "infoid")
+	@TableId(type = IdType.AUTO,value = "infoid")
     private Integer infoid;
 
     private Integer typeid;
