@@ -3,6 +3,13 @@
 
 <mapper namespace="com.accp.dao.tyh.tyhIMemberDAO">
 
+	<!-- 根据会员ID查询会员消费记录 -->
+	<select id="tyhQueryByMemberinfo" resultType="tyhMemberInfo">
+		SELECT * FROM `memberinfo` AS mo
+		INNER JOIN `member` AS m
+		ON mo.`memberid` = m.`memberid`
+	</select>
+
 	<!-- 查询会员等级 -->
 	<select id="tyhQueryByGrade" resultType="Grade">
 		select * from Grade

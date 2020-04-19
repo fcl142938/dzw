@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.accp.dao.tyh.tyhIMemberDAO;
 import com.accp.pojo.Grade;
 import com.accp.pojo.Member;
+import com.accp.pojo.Memberinfo;
 import com.accp.vo.tyh.Members;
+import com.accp.vo.tyh.tyhMemberInfo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
@@ -22,6 +24,11 @@ public class tyhMemberBiz {
 	
 	@Autowired
 	private tyhIMemberDAO dao;
+	
+	/* 根据会员ID查询会员消费记录 */
+	public List<tyhMemberInfo> tyhQueryByMemberinfo(Integer memberid){
+		return dao.tyhQueryByMemberinfo(memberid);
+	}
 	
 	/* 查询会员等级 */
 	public List<Grade> tyhQueryByGrade(){

@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.accp.biz.tyh.tyhMemberBiz;
 import com.accp.pojo.Grade;
 import com.accp.pojo.Member;
+import com.accp.pojo.Memberinfo;
 import com.accp.vo.tyh.Members;
+import com.accp.vo.tyh.tyhMemberInfo;
 import com.github.pagehelper.PageInfo;
 
 @RestController
@@ -25,6 +27,16 @@ public class tyhMemberAction {
 	
 	@Autowired
 	private tyhMemberBiz biz;
+	
+	/**
+	 *  根据会员ID查询会员消费记录
+	 * @param memberid
+	 * @return
+	 */
+	@GetMapping("/tyhQueryByMemberinfo/{memberid}")
+	public List<tyhMemberInfo> tyhQueryByMemberinfo(@PathVariable Integer memberid){
+		return biz.tyhQueryByMemberinfo(memberid);
+	}
 	
 	/**
 	 *  查询会员等级 
