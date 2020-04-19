@@ -117,6 +117,10 @@ public class PxBiz {
 	public int updatestaffinfo(String staffname ) {
 		return pdao.updatestaffinfo(staffname);
 	}
+	//查询部门下面是否有职位
+	public List<Position> querybypos(Integer departmentid){
+		return pdao.querybypos(departmentid);
+	}
  
 	
 

@@ -18,5 +18,6 @@ public interface PxDao extends BaseMapper<PX>{
 	int updatestaffinfo(@Param("staffname")String staffname );
 	PX   selectbystaffid(@Param("staffid")Integer staffid);
 	List<Position> selectposition();
+	List<Position> querybypos(@Param("departmentid")Integer departmentid);
 
 }

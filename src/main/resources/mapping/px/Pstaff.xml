@@ -59,6 +59,10 @@ and s.`staffid`=#{staffid}
    <select id="selectposition" resultType="com.accp.pojo.Position">
    select * from position
    </select>
+   
+   <select id="querybypos" resultType="com.accp.pojo.Position">
+     SELECT * FROM `position` WHERE `departmentid`=#{departmentid}
+   </select>
 
 
 </mapper>

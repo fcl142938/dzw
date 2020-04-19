@@ -162,6 +162,12 @@ public class PxAction {
 						 return message;
 					
 				}
+			
+			//查询部门下面是否有职位
+			@GetMapping("querypos/{departmentid}")
+			public List<Position> querybypos(@PathVariable Integer departmentid){
+				return pbiz.querybypos(departmentid);
+			}
 	 
 	 
 
