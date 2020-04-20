@@ -30,8 +30,8 @@ public class tyhSettlementCenterBiz {
 	}
 	
 	/* 打开单据 */
-	public tyhParticulars tyhQueryByXq(Integer smid) {
-		return dao.tyhQueryByXq(smid);
+	public tyhParticulars tyhQueryByXq(String smid) {
+		return dao.tyhQueryByXq(smid).get(0);
 	}
 	
 	//多条件查询
@@ -41,7 +41,7 @@ public class tyhSettlementCenterBiz {
 	
 	//回滚
 	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, readOnly = false)
-	public int tyhupdateByHgSettlementCenter(Integer smid) {
+	public int tyhupdateByHgSettlementCenter(String smid) {
 		return dao.tyhupdateByHgSettlementCenter(smid);
 	}
 	
@@ -75,7 +75,7 @@ public class tyhSettlementCenterBiz {
 	
 	//收银
 	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, readOnly = false)
-	public int tyhupdateBySettlementCenter(Integer smid) {
+	public int tyhupdateBySettlementCenter(String smid) {
 		return dao.tyhupdateBySettlementCenter(smid);
 	}
 	

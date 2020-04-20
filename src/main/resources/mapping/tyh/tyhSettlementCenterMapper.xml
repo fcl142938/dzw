@@ -26,12 +26,12 @@
 	</select>
 
 	<!-- 打开单据 -->
-	<select id="tyhQueryByXq" resultType="tyhParticulars">
-	SELECT so.`infoid`,s.`smid`,cr.carnumber,m.`motorcyclename`,cd.`brandname`,md.`motorid`,md.`motorname`,sf.staffname,c.`username`,cr.`drivername`,cr.`driverphone`,cr.`carcourse`,s.`starttime`,s.`entime`,s.`countprice`,c.`userremark`,s.`consumermark` FROM `servicingmain` AS s
-		INNER JOIN `servicinginfo` AS so
-		ON s.`smid` = so.`smid`
-		INNER JOIN `typeinfo` AS t
-		ON so.`infoid` = t.`infoid`
+	<select id="tyhQueryByXq" resultMap="thyp">
+	SELECT so.`courseid`,so.`infomark`,so.`infoname`,so.`infotime`,so.`price`,
+	so.`infoid`,s.`smid`,cr.carnumber,m.`motorcyclename`,cd.`brandname`,md.`motorid`,md.`motorname`,sf.staffname,c.`username`,cr.`drivername`,cr.`driverphone`,cr.`carcourse`,s.`starttime`,s.`entime`,s.`countprice`,c.`userremark`,s.`consumermark` FROM `servicingmain` AS s
+
+		<!-- INNER JOIN `typeinfo` AS t
+		ON so.`infoid` = t.`infoid` -->
 		INNER JOIN `staff` AS sf
 		ON s.`staffid` = sf.`staffid`
 		INNER JOIN `consumercar` AS cr
@@ -44,6 +44,8 @@
 		ON m.`brandid` = cd.`brandid`
 		INNER JOIN `motorbrand` AS md
 		ON m.`motorid` = md.`motorid`
+		left JOIN `servicinginfo` AS so
+		ON s.`smid` = so.`smid`
 		WHERE s.`smid` = #{smid}
 		<!-- SELECT so.`infoid`,s.`smid`,cr.carnumber,m.`motorcyclename`,cd.`brandname`,md.`motorid`,md.`motorname`,sf.staffname,c.`username`,cr.`drivername`,cr.`driverphone`,cr.`carcourse`,s.`starttime`,s.`entime`,s.`countprice`,c.`userremark`,s.`consumermark` FROM `servicingmain` AS s
 		INNER JOIN `servicinginfo` AS so
@@ -64,6 +66,34 @@
 		ON m.`motorid` = md.`motorid`
 		WHERE s.`smid` = #{smid} -->
 	</select>
+	<resultMap type="tyhParticulars" id="thyp">
+		<id column="smid" property="smid"/>
+		<result column="carnumber" property="carnumber"/>
+		<result column="motorcyclename" property="motorcyclename"/>
+		<result column="brandname" property="brandname"/>
+		<result column="motorid" property="motorid"/>
+		<result column="motorname" property="motorname"/>
+		<result column="staffname" property="staffname"/>
+		<result column="username" property="username"/>
+		<result column="drivername" property="drivername"/>
+		<result column="driverphone" property="driverphone"/>
+		<result column="carcourse" property="carcourse"/>
+		<result column="starttime" property="starttime"/>
+		<result column="entime" property="entime"/>
+		<result column="countprice" property="countprice"/>
+		<result column="userremark" property="userremark"/>
+		<result column="consumermark" property="consumermark"/>	
+		<collection property="list" ofType="Servicinginfo">
+			<id column="siid" property="siid"/>	
+			<result column="smid" property="smid"/>
+			<result column="infoid" property="infoid"/>
+			<result column="infoname" property="infoname"/>
+			<result column="price" property="price"/>
+			<result column="infomark" property="infomark"/>
+			<result column="courseid" property="courseid"/>
+			<result column="infotime" property="infotime"/>	
+		</collection>	
+	</resultMap>
 
 	<!-- 多条件查看 -->
 	<select id="queryByMaxSettlementCenter" resultType="SettlementCenter">
@@ -81,7 +111,7 @@
 		ON cr.`motorcycleid` = m.`motorcycleid`
 		INNER JOIN `rescuecar` AS r
 		ON s.`rescueid` = r.`rescueid` -->
-		SELECT s.`smid`,s.`state`,s.`starttime`,s.`entime`,s.`staffid`,sf.`staffname`,s.`price`,cr.`carnumber`,m.`motorcyclename`,sf.`price` AS sfprice
+		SELECT s.`smid`,s.`state`,s.`starttime`,s.`entime`,s.`staffid`,sf.`staffname`,s.`price`,cr.`carnumber`,m.`motorcyclename`,s.`countprice`,sf.`price` AS sfprice
 		 FROM `servicingmain` AS s
 		INNER JOIN `artificergrow` AS a
 		ON s.`gid` = a.`gid`
@@ -137,7 +167,7 @@
 
 	<!-- 结算中心查看 -->
 	<select id="queryBySettlementCenter" resultType="SettlementCenter">
-	SELECT s.`smid`,s.`state`,s.`starttime`,s.`entime`,s.`staffid`,sf.`staffname`,s.`price`,cr.`carnumber`,m.`motorcyclename`,sf.`price` AS sfprice
+	SELECT s.`smid`,s.`state`,s.`starttime`,s.`entime`,s.`staffid`,sf.`staffname`,s.`price`,cr.`carnumber`,m.`motorcyclename`,s.`countprice`,sf.`price` AS sfprice
 	 FROM `servicingmain` AS s
 	INNER JOIN `artificergrow` AS a
 	ON s.`gid` = a.`gid`

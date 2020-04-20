@@ -43,7 +43,7 @@ public class tyhSettlementCenterAction {
 	 *  打开单据 
 	 */
 	@GetMapping("/tyhQueryByXq/{smid}")
-	public tyhParticulars tyhQueryByXq(@PathVariable Integer smid) {
+	public tyhParticulars tyhQueryByXq(@PathVariable String smid) {
 		return biz.tyhQueryByXq(smid);
 	}
 	
@@ -71,7 +71,7 @@ public class tyhSettlementCenterAction {
 	 * @return
 	 */
 	@PutMapping("/tyhupdateByHgSettlementCenter/{smid}")
-	public Map<String, Object> tyhupdateByHgSettlementCenter(@RequestBody Integer smid) {
+	public Map<String, Object> tyhupdateByHgSettlementCenter(@RequestBody String smid) {
 		Map<String, Object> message = new HashMap<String, Object>();
 		if(biz.tyhupdateByHgSettlementCenter(smid) > 0) {
 			message.put("code", "200");
@@ -165,7 +165,7 @@ public class tyhSettlementCenterAction {
 	 * @return
 	 */
 	@PutMapping("/tyhupdateBySettlementCenter/{smid}")
-	public Map<String, Object> tyhupdateBySettlementCenter(@RequestBody Integer smid) {
+	public Map<String, Object> tyhupdateBySettlementCenter(@RequestBody String smid) {
 		Map<String, Object> message = new HashMap<String, Object>();
 		if(biz.tyhupdateBySettlementCenter(smid) > 0) {
 			message.put("code", "200");

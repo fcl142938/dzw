@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.dao.fcl.FclServicingmainDao">
+	<select id="queryCount" resultType="int">
+		select count(*) from Servicingmain  WHERE TO_DAYS(starttime) =TO_DAYS(NOW()) 
+	</select>
+	
+	<select id="queryAll" resultType="com.accp.pojo.Servicingmain">
+		select * from Servicingmain  WHERE TO_DAYS(starttime) =TO_DAYS(NOW()) 
+	</select>
+</mapper>

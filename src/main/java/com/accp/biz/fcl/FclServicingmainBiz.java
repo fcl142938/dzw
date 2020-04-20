@@ -30,6 +30,7 @@ import com.accp.vo.fcl.FclSerAllVo;
 import com.accp.vo.fcl.FclServicingmainVo;
 import com.accp.vo.fcl.FclShowVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
@@ -66,7 +67,8 @@ public class FclServicingmainBiz {
 	 * @param pageSize
 	 * @return
 	 */
-	public PageInfo<FclServicingmainVo> queryPage(Integer state, Integer currentPage, Integer pageSize,Integer status) {
+	public PageInfo<FclServicingmainVo> queryPage(Integer state, Integer currentPage, Integer pageSize,
+			Integer status) {
 		List<Servicingmain> list = null;
 		Integer total = 0;
 
@@ -74,15 +76,16 @@ public class FclServicingmainBiz {
 		if (state == -1) {
 			total = dao.selectList(null).size();
 			PageHelper.startPage(currentPage, pageSize);
-			list = dao.selectList(null);		
-		}else if(status!=null&&status==0) {
-			total = dao.selectList(new QueryWrapper<Servicingmain>().eq("state",0).or().eq("state", 5)).size();
+			list = dao.selectList(new QueryWrapper<Servicingmain>().orderByDesc("starttime"));
+		} else if (status != null && status == 0) {
+			total = dao.selectList(new QueryWrapper<Servicingmain>().eq("state", 0).or().eq("state", 5)).size();
 			PageHelper.startPage(currentPage, pageSize);
-			list = dao.selectList(new QueryWrapper<Servicingmain>().eq("state",0).or().eq("state", 5));
-		}else {
+			list = dao.selectList(
+					new QueryWrapper<Servicingmain>().eq("state", 0).or().eq("state", 5).orderByDesc("starttime"));
+		} else {
 			total = dao.selectList(new QueryWrapper<Servicingmain>().eq("state", state)).size();
 			PageHelper.startPage(currentPage, pageSize);
-			list = dao.selectList(new QueryWrapper<Servicingmain>().eq("state", state));
+			list = dao.selectList(new QueryWrapper<Servicingmain>().eq("state", state).orderByDesc("starttime"));
 		}
 
 		List<FclServicingmainVo> listvo = new ArrayList<FclServicingmainVo>();
@@ -108,7 +111,8 @@ public class FclServicingmainBiz {
 	 */
 	public FclSerAllVo queryRescuecar() {
 		return new FclSerAllVo(rdao.selectList(new QueryWrapper<Rescuecar>().eq("state", 0)),
-				adao.selectList(new QueryWrapper<Artificergrow>().eq("state", 0)), cdao.selectList(new QueryWrapper<Consumercar>().eq("conState",0)));
+				adao.selectList(new QueryWrapper<Artificergrow>().eq("state", 0)),
+				cdao.selectList(new QueryWrapper<Consumercar>().eq("conState", 0)));
 	}
 
 	/**
@@ -118,8 +122,8 @@ public class FclServicingmainBiz {
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, readOnly = false)
 	public void addSerMain(FclServicingmainVo vo) {
-		//修改客户车状态
-		Consumercar car= new Consumercar();
+		// 修改客户车状态
+		Consumercar car = new Consumercar();
 		car.setConstate(1);
 		car.setConsumerid(vo.getSer().getConsumerid());
 		cdao.updateById(car);
@@ -128,15 +132,11 @@ public class FclServicingmainBiz {
 		vo.getSer().setStarttime(new Date());
 		vo.getSer().setSmid(smid);
 		vo.getSer().setState(0);
-		//后台计算总价格
-		Double countprice = 0.0;
 		for (Servicinginfo obj : vo.getList()) {
 			obj.setSmid(smid);
 			sdao.insert(obj);
-			countprice += obj.getPrice();
 		}
-		vo.getSer().setPrice(countprice);
-		vo.getSer().setCountprice(countprice);
+		vo.getSer().setPrice(vo.getSer().getCountprice());
 		dao.insert(vo.getSer());
 	}
 
@@ -155,7 +155,7 @@ public class FclServicingmainBiz {
 	// 检查
 	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, readOnly = false)
 	public void modifyCourse(Servicingcourse se) {
-		//System.out.println(se.getSmid());
+		// System.out.println(se.getSmid());
 		// 修改过程表
 		scdao.update(se, new QueryWrapper<Servicingcourse>().eq("smid", se.getSmid()).eq("coursestate", 2));
 		// 修改状态 合格
@@ -163,17 +163,18 @@ public class FclServicingmainBiz {
 		if (se.getCoursestate() == 0) {
 			sermain.setState(3);
 			sermain.setEntime(new Date());
-			//修改客户车状态
-			Consumercar car= new Consumercar();
+			// 修改客户车状态
+			Consumercar car = new Consumercar();
 			car.setConstate(0);
 			car.setConsumerid(sermain.getConsumerid());
 			cdao.updateById(car);
 		} else {
-			//添加一条返工记录
-			sdao.insert(new Servicinginfo(se.getSmid(), 0, "返工费", 200.0, "维修返工", 0));
+			// 添加一条返工记录
+			Integer number=scdao.selectList(new QueryWrapper<Servicingcourse>().eq("smid", se.getSmid())).size();
+			sdao.insert(new Servicinginfo(se.getSmid(), 0, "返工费", 200.0, "第"+number+"次维修返工", number-1));
 			// 返工
 			sermain.setState(5);
-			sermain.setPrice(sermain.getCountprice()+200);
+			sermain.setCountprice(sermain.getCountprice() + 200);
 		}
 		dao.updateById(sermain);
 	}
@@ -186,8 +187,7 @@ public class FclServicingmainBiz {
 	 * @return
 	 */
 	public List<FclServicingmainVo> queryShow() {
-		List<Servicingmain> list = dao.selectList(new QueryWrapper<Servicingmain>().eq("starttime",
-				new SimpleDateFormat("yyyy-MM-dd").format(new Date())));
+		List<Servicingmain> list = dao.queryAll();
 		List<FclServicingmainVo> listvo = new ArrayList<FclServicingmainVo>();
 		list.forEach(temp -> {
 			FclServicingmainVo vo = new FclServicingmainVo();
@@ -200,38 +200,43 @@ public class FclServicingmainBiz {
 		return listvo;
 	}
 
-	
-	//统计
-	public  FclShowVo queryShowData() {
-		String date=new  SimpleDateFormat("yyyy-MM-dd").format(new Date());
-		Double countprice=0.0;
-		List<Servicingmain> list= dao.selectList(new QueryWrapper<Servicingmain>().eq("starttime",date).eq("state",5));
-		if(list!=null&&list.size()!=0) {
-			for (Servicingmain obj:list) {
-				if(obj!=null) {
-					countprice+=obj.getPrice();
+	// 统计
+	public FclShowVo queryShowData() {
+		String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+		Double countprice = 0.0;
+		List<Servicingmain> list = dao
+				.selectList(new QueryWrapper<Servicingmain>().eq("entime", date).eq("state", 4));
+		if (list != null && list.size() != 0) {
+			for (Servicingmain obj : list) {
+				if (obj != null) {
+					countprice += obj.getPrice();
 				}
 			}
-		}	
-		return new FclShowVo(countprice, dao.selectList(new QueryWrapper<Servicingmain>().eq("starttime",date)).size(), scdao.selectList(new QueryWrapper<Servicingcourse>().eq("courseendtime", date).eq("coursestate",3)).size(), scdao.selectList(new QueryWrapper<Servicingcourse>().eq("courseendtime", date).eq("coursestate",1)).size());
+		}
+		return new FclShowVo(countprice,dao.queryCount(),
+				scdao.selectList(new QueryWrapper<Servicingcourse>().eq("courseendtime", date).eq("coursestate",0))
+						.size(),
+				scdao.selectList(new QueryWrapper<Servicingcourse>().eq("courseendtime", date).eq("coursestate", 1))
+						.size());
 	}
-	
-	//技工操作
-	public  void updateCourseState(String smid,Integer state) {
-		//开始施工
-		Servicingmain ser= new Servicingmain();
+
+	// 技工操作
+	public void updateCourseState(String smid, Integer state) {
+		// 开始施工
+		Servicingmain ser = new Servicingmain();
 		ser.setSmid(smid);
 		ser.setState(state);
 		dao.updateById(ser);
-		if(state==1) {
-			scdao.insert(new Servicingcourse(null, smid, new Date(), null,3, null));
-		}else {
-			//提交施工
-			scdao.update(new Servicingcourse(null, smid, null, new Date(),2, null),new QueryWrapper<Servicingcourse>().eq("smid",smid).eq("coursestate",3));
+		if (state == 1) {
+			scdao.insert(new Servicingcourse(null, smid, new Date(), null, 3, null));
+		} else {
+			// 提交施工
+			scdao.update(new Servicingcourse(null, smid, null, new Date(), 2, null),
+					new QueryWrapper<Servicingcourse>().eq("smid", smid).eq("coursestate", 3));
 		}
-		
+
 	}
-	
+
 	/**
 	 * 修改
 	 * 
@@ -240,17 +245,55 @@ public class FclServicingmainBiz {
 	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, readOnly = false)
 	public void UpSerMain(FclServicingmainVo vo) {
 		// 添加主单 获取主单号
-		Servicingmain ser=new Servicingmain();
-		ser.setSmid(vo.getSer().getSmid());
-		sdao.delete(new QueryWrapper<Servicinginfo>().eq("smid", ser.getSmid()));
-		Double countprice=0.0;
+		Servicingmain ser = vo.getSer();
+		Integer number=scdao.selectList(new QueryWrapper<Servicingcourse>().eq("smid", ser.getSmid())).size();
+		/* sdao.delete(new QueryWrapper<Servicinginfo>().eq("smid", ser.getSmid())); */
 		for (Servicinginfo obj : vo.getList()) {
 			obj.setSmid(ser.getSmid());
-			sdao.insert(obj);
-			countprice += obj.getPrice();
+			if(obj.getCourseid()==null) {
+				obj.setCourseid(number);
+				sdao.insert(obj);	
+			}	
 		}
-		ser.setPrice(countprice);
 		dao.updateById(ser);
 	}
-	
+
+	// ajax轮询刷新页面
+	public String ajaxUp() {
+		String message = "no";
+		Date date = new Date();
+		List<Servicingmain> list = dao.selectList(new QueryWrapper<Servicingmain>().eq("state", 0));
+		if (list != null) {
+			for (int i = 0; i < list.size(); i++) {
+				System.out.println(date.getTime() - list.get(i).getStarttime().getTime() % (24 * 3600) / 3600);
+				if ((date.getTime() - list.get(i).getStarttime().getTime() % (24 * 3600) / 3600) > 2) {
+					//修改状态
+					list.get(i).setState(1);
+					dao.updateById(list.get(i));
+					scdao.insert(new Servicingcourse(null, list.get(i).getSmid(), new Date(), null, 3, null));
+					message = "ok";
+				}
+			}
+		}
+		System.out.println("------------");
+		List<Servicingmain> list1 = dao.selectList(new QueryWrapper<Servicingmain>().eq("state", 1));
+		if (list1 != null) {
+			for (int i = 0; i < list1.size(); i++) {
+				//查询记录
+				QueryWrapper<Servicingcourse> qw=Wrappers.query();
+				qw.eq("smid",list1.get(i).getSmid()).eq("coursestate", 3);
+				Servicingcourse ser=scdao.selectOne(qw);
+				System.out.println(date.getTime()-ser.getCoursestarttime().getTime() % (24 * 3600) / 3600+","+list1.get(i).getCounttime());
+				if ((date.getTime()-ser.getCoursestarttime().getTime() % (24 * 3600) / 3600)>list1.get(i).getCounttime()) {
+					//修改状态
+					list1.get(i).setState(2);
+					dao.updateById(list1.get(i));
+					scdao.update(new Servicingcourse(null, list1.get(i).getSmid(), null, new Date(), 2, null),qw);
+					message = "ok";
+				}
+			}
+		}	
+		return message;
+	}
+
 }
