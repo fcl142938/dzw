@@ -31,7 +31,7 @@ public class tyhSettlementCenterBiz {
 	
 	/* 打开单据 */
 	public tyhParticulars tyhQueryByXq(String smid) {
-		return dao.tyhQueryByXq(smid);
+		return dao.tyhQueryByXq(smid).get(0);
 	}
 	
 	//多条件查询

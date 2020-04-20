@@ -17,7 +17,7 @@ public interface tyhISettlementCenterDAO {
 	List<tyhParticulars> tyhQueryByXm(@Param("infoid") Integer infoid);
 	
 	/* 打开单据 */
-	tyhParticulars tyhQueryByXq(@Param("smid") String smid);
+	List<tyhParticulars> tyhQueryByXq(@Param("smid") String smid);
 	
 	//多条件查询
 	List<SettlementCenter> queryByMaxSettlementCenter(@Param("state") String state,@Param("smid") String smid,@Param("carnumber") String carnumber,@Param("username") String username,@Param("staffname") String staffname,@Param("userremark") String userremark,@Param("starttime") String starttime,@Param("entime") String entime);
