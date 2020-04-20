@@ -13,7 +13,7 @@ import com.accp.vo.tyh.tyhParticulars;
 
 public interface tyhISettlementCenterDAO {
 	
-	
+	//
 	
 	/* 维修项目 */
 	List<tyhParticulars> tyhQueryByXm(@Param("infoid") Integer infoid);
