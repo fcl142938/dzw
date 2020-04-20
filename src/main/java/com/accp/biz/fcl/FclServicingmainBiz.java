@@ -187,8 +187,7 @@ public class FclServicingmainBiz {
 	 * @return
 	 */
 	public List<FclServicingmainVo> queryShow() {
-		List<Servicingmain> list = dao.selectList(new QueryWrapper<Servicingmain>().eq("starttime",
-				new SimpleDateFormat("yyyy-MM-dd").format(new Date())));
+		List<Servicingmain> list = dao.queryAll();
 		List<FclServicingmainVo> listvo = new ArrayList<FclServicingmainVo>();
 		list.forEach(temp -> {
 			FclServicingmainVo vo = new FclServicingmainVo();
@@ -206,7 +205,7 @@ public class FclServicingmainBiz {
 		String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 		Double countprice = 0.0;
 		List<Servicingmain> list = dao
-				.selectList(new QueryWrapper<Servicingmain>().eq("starttime", date).eq("state", 5));
+				.selectList(new QueryWrapper<Servicingmain>().eq("entime", date).eq("state", 4));
 		if (list != null && list.size() != 0) {
 			for (Servicingmain obj : list) {
 				if (obj != null) {
@@ -214,8 +213,8 @@ public class FclServicingmainBiz {
 				}
 			}
 		}
-		return new FclShowVo(countprice, dao.selectList(new QueryWrapper<Servicingmain>().eq("starttime", date)).size(),
-				scdao.selectList(new QueryWrapper<Servicingcourse>().eq("courseendtime", date).eq("coursestate", 3))
+		return new FclShowVo(countprice,dao.queryCount(),
+				scdao.selectList(new QueryWrapper<Servicingcourse>().eq("courseendtime", date).eq("coursestate",0))
 						.size(),
 				scdao.selectList(new QueryWrapper<Servicingcourse>().eq("courseendtime", date).eq("coursestate", 1))
 						.size());
