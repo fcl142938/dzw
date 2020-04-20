@@ -81,7 +81,7 @@
 		ON cr.`motorcycleid` = m.`motorcycleid`
 		INNER JOIN `rescuecar` AS r
 		ON s.`rescueid` = r.`rescueid` -->
-		SELECT s.`smid`,s.`state`,s.`starttime`,s.`entime`,s.`staffid`,sf.`staffname`,s.`price`,cr.`carnumber`,m.`motorcyclename`,sf.`price` AS sfprice
+		SELECT s.`smid`,s.`state`,s.`starttime`,s.`entime`,s.`staffid`,sf.`staffname`,s.`price`,cr.`carnumber`,m.`motorcyclename`,s.`countprice`,sf.`price` AS sfprice
 		 FROM `servicingmain` AS s
 		INNER JOIN `artificergrow` AS a
 		ON s.`gid` = a.`gid`
@@ -137,7 +137,7 @@
 
 	<!-- 结算中心查看 -->
 	<select id="queryBySettlementCenter" resultType="SettlementCenter">
-	SELECT s.`smid`,s.`state`,s.`starttime`,s.`entime`,s.`staffid`,sf.`staffname`,s.`price`,cr.`carnumber`,m.`motorcyclename`,sf.`price` AS sfprice
+	SELECT s.`smid`,s.`state`,s.`starttime`,s.`entime`,s.`staffid`,sf.`staffname`,s.`price`,cr.`carnumber`,m.`motorcyclename`,s.`countprice`,sf.`price` AS sfprice
 	 FROM `servicingmain` AS s
 	INNER JOIN `artificergrow` AS a
 	ON s.`gid` = a.`gid`
