@@ -42,6 +42,7 @@ public class LxArtificerAction {
 		System.out.println("nnn"+n+"sss"+s);
 		return biz.queryStarBySid(sid,n,s);
 	}
+	
 	/**
 	 * 根据班组编码查询班组信息
 	 * @param bid班组编码
