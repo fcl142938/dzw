@@ -3,7 +3,7 @@ package com.accp.vo.tyh;
 import java.util.Date;
 
 public class tyhParticulars {
-	private Integer smid;
+	private String smid;
 	private String carnumber;
 	private String motorcyclename;
 	private String brandname;
@@ -40,7 +40,7 @@ public class tyhParticulars {
 				+ infoname + ", price=" + price + ", infomark=" + infomark + ", siid=" + siid + "]";
 	}
 
-	public tyhParticulars(Integer smid, String carnumber, String motorcyclename, String brandname, Integer motorid,
+	public tyhParticulars(String smid, String carnumber, String motorcyclename, String brandname, Integer motorid,
 			String motorname, String staffname, String username, String drivername, String driverphone,
 			Double carcourse, Date starttime, Date entime, Double countprice, String userremark, String consumermark,
 			Integer typeid, String typename, Integer typeparent, Integer infoid, String infoname, Double price,
@@ -76,10 +76,10 @@ public class tyhParticulars {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Integer getSmid() {
+	public String getSmid() {
 		return smid;
 	}
-	public void setSmid(Integer smid) {
+	public void setSmid(String smid) {
 		this.smid = smid;
 	}
 	public String getCarnumber() {
