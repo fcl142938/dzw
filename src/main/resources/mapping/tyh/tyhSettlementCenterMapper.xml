@@ -30,8 +30,8 @@
 	SELECT so.`infoid`,s.`smid`,cr.carnumber,m.`motorcyclename`,cd.`brandname`,md.`motorid`,md.`motorname`,sf.staffname,c.`username`,cr.`drivername`,cr.`driverphone`,cr.`carcourse`,s.`starttime`,s.`entime`,s.`countprice`,c.`userremark`,s.`consumermark` FROM `servicingmain` AS s
 		INNER JOIN `servicinginfo` AS so
 		ON s.`smid` = so.`smid`
-		INNER JOIN `typeinfo` AS t
-		ON so.`infoid` = t.`infoid`
+		<!-- INNER JOIN `typeinfo` AS t
+		ON so.`infoid` = t.`infoid` -->
 		INNER JOIN `staff` AS sf
 		ON s.`staffid` = sf.`staffid`
 		INNER JOIN `consumercar` AS cr
