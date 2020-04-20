@@ -9,7 +9,7 @@ public class Typeinfo {
     private Integer infoid;
  
     private Integer typeid;
-
+ 
     private String infoname;
 
     private Long price;
