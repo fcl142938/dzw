@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.accp.biz.lx.LxArtificerBiz;
 import com.accp.pojo.Artificer;
-import com.accp.pojo.Artificergrow;
 import com.github.pagehelper.PageInfo;
 
 @RestController
@@ -33,7 +32,6 @@ public class LxArtificerAction {
 	public PageInfo<Artificer> queryStarAll(@PathVariable Integer n,@PathVariable Integer s) {		
 		return biz.queryStarAll(n,s);
 	}
-	
 	/**
 	 * 根据班组编码查询班组信息
 	 * @param bid班组编码
@@ -59,7 +57,7 @@ public class LxArtificerAction {
 	 * @return
 	 */
 	@PostMapping("addbanzu")
-	public Map<String, Object> addCar(@RequestBody Artificer bz) {
+	public Map<String, Object> addbanzujg(@RequestBody Artificer bz) {
 		int count=biz.addBanzu(bz);
 		Map<String, Object> message = new HashMap<String, Object>();
 		if(count!=0) {
