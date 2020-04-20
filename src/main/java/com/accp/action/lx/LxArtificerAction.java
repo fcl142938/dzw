@@ -51,6 +51,7 @@ public class LxArtificerAction {
 	public Artificer queryStarBySid(@PathVariable int bzid) {
 		return biz.queryStarBySid(bzid);
 	}
+	
 	/**
 	 * 新增班组
 	 * @param bz
