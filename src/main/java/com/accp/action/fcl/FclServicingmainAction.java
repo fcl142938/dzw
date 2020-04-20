@@ -87,4 +87,10 @@ public class FclServicingmainAction {
 		return "ok";
 	}
 	
+	
+	//ajax刷新页面
+	@GetMapping("ajaxUp")
+	public  String ajaxUp() {
+		return biz.ajaxUp();
+	}
 }
