@@ -7,7 +7,7 @@ public class Typeinfo {
 	
 	@TableId(type = IdType.AUTO,value = "infoid")
     private Integer infoid;
-
+ 
     private Integer typeid;
 
     private String infoname;
