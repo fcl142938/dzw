@@ -16,13 +16,13 @@ public class Member {
 
     private String memberpwd;
 
-    private Long memberintegrate;
+    private Double memberintegrate;
 
-    private Long countintegrate;
+    private Double countintegrate;
 
-    private Long money;
+    private Double money;
 
-    private Long countmoney;
+    private Double countmoney;
 
     private Date starttime;
 
@@ -58,35 +58,35 @@ public class Member {
         this.memberpwd = memberpwd == null ? null : memberpwd.trim();
     }
 
-    public Long getMemberintegrate() {
+    public Double getMemberintegrate() {
         return memberintegrate;
     }
 
-    public void setMemberintegrate(Long memberintegrate) {
+    public void setMemberintegrate(Double memberintegrate) {
         this.memberintegrate = memberintegrate;
     }
 
-    public Long getCountintegrate() {
+    public Double getCountintegrate() {
         return countintegrate;
     }
 
-    public void setCountintegrate(Long countintegrate) {
+    public void setCountintegrate(Double countintegrate) {
         this.countintegrate = countintegrate;
     }
 
-    public Long getMoney() {
+    public Double getMoney() {
         return money;
     }
 
-    public void setMoney(Long money) {
+    public void setMoney(Double money) {
         this.money = money;
     }
 
-    public Long getCountmoney() {
+    public Double getCountmoney() {
         return countmoney;
     }
 
-    public void setCountmoney(Long countmoney) {
+    public void setCountmoney(Double countmoney) {
         this.countmoney = countmoney;
     }
 

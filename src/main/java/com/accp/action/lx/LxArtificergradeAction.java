@@ -1,6 +1,7 @@
 package com.accp.action.lx;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +30,9 @@ public class LxArtificergradeAction {
 	  * @param s
 	  * @return
 	  */
-	@GetMapping("queryStarAll/{n}/{s}")
-	public PageInfo<Artificergrade> queryStarAll(@PathVariable Integer n,@PathVariable Integer s) {		
-		return biz.queryStarAll(n,s);
+	@GetMapping("queryStarAll")
+	public List<Artificergrade> queryStarAll() {		
+		return biz.queryStarAll();
 	}
 	
 	/**

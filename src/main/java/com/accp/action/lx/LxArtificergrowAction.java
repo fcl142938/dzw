@@ -39,7 +39,7 @@ public class LxArtificergrowAction {
 	 */
 	@GetMapping("queryBanzuList")
 	public List<Artificergrow> queryBanzuList(){
-		System.out.println(biz.queryBanzuList());
+		//System.out.println(biz.queryBanzuList());
 		return biz.queryBanzuList();
 	}
 	/**

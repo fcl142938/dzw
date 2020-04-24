@@ -1,5 +1,6 @@
 package com.accp.biz.tyh;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -59,6 +60,10 @@ public class tyhMemberBiz {
 	/* 新增会员 */
 	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, readOnly = false)
 	public int tyhInsertByMember(Member m) {
+		m.setCountmoney(m.getMoney());
+		m.setMemberintegrate(m.getMoney()/10);
+		m.setCountintegrate(m.getMoney()/10);
+		m.setStarttime(new Date());
 		return dao.tyhInsertByMember(m);
 	}
 	

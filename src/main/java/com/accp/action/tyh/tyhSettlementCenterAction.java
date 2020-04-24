@@ -1,9 +1,13 @@
 package com.accp.action.tyh;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accp.biz.tyh.tyhSettlementCenterBiz;
+import com.accp.clg.AlipayService;
 import com.accp.pojo.Member;
 import com.accp.pojo.Memberinfo;
 import com.accp.vo.tyh.MemberInfos;
@@ -28,6 +33,9 @@ public class tyhSettlementCenterAction {
 	
 	@Autowired
 	private tyhSettlementCenterBiz biz;
+	
+	 @Autowired
+	  AlipayService alipayService;
 	
 	/**
 	 *  维修项目 
@@ -160,19 +168,28 @@ public class tyhSettlementCenterAction {
 
 	
 	/**
-	 * 收银
+	 * 收银//二维码收款
 	 * @param smid
 	 * @return
+	 * @throws IOException 
 	 */
-	@PutMapping("/tyhupdateBySettlementCenter/{smid}")
-	public Map<String, Object> tyhupdateBySettlementCenter(@RequestBody String smid) {
+	@GetMapping("/tyhupdateBySettlementCenter/{smid}")
+	public Map<String, Object>  tyhupdateBySettlementCenter(@PathVariable String smid) throws IOException {
 		Map<String, Object> message = new HashMap<String, Object>();
+		System.out.println(smid);
 		if(biz.tyhupdateBySettlementCenter(smid) > 0) {
 			message.put("code", "200");
 		} else {
 			message.put("code", "500");
-		}
-		return message;
+			}
+			return message;
+	}
+	
+	//二维码收款
+	@GetMapping("/showalipay/{smid}/{state}")
+	public String showalipay(HttpServletResponse response, HttpServletRequest request,@PathVariable String smid,@PathVariable Integer state) throws IOException {
+		Map<String, Object> message = new HashMap<String, Object>();
+		return alipayService.aliPay(response, request, smid,state);
 	}
 	
 	/**

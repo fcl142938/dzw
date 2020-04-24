@@ -22,11 +22,9 @@ public class MotorbrandAction {
 	@Autowired
 	private MotorbrandBiz biz;
 	
-	@GetMapping("showList/{pageNum}/{pageSize}")
-	public PageInfo<Motorbrand> selectList(@PathVariable int pageNum,@PathVariable int pageSize) {
-		
-
-		return biz.selectList(pageNum, pageSize);
+	@GetMapping("showList")
+	public PageInfo<Motorbrand> selectList() {
+		return biz.selectList();
 	}
 	
 	@PostMapping("add")

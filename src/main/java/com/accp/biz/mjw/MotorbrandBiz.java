@@ -19,8 +19,9 @@ public class MotorbrandBiz {
 	@Autowired
 	private MotorbrandDao dao;
 	
-	public PageInfo<Motorbrand> selectList(int pageNum,int pageSize) {
-		PageHelper.startPage(pageNum, pageSize);
+	public PageInfo<Motorbrand> selectList() {
+		//int pageNum,int pageSize
+	//	PageHelper.startPage(pageNum, pageSize);
 
 		return new PageInfo<Motorbrand>(dao.selectList(null));
 	}

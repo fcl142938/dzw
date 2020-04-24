@@ -43,8 +43,8 @@ public class FclServicingmainAction {
 	
 	@PostMapping("addSerMain")
 	public  String addSerMain(@RequestBody FclServicingmainVo vo,HttpSession session) {
-		//FclStaffVo staff=(FclStaffVo)session.getAttribute("stfvo");
-		//vo.getSer().setStaffid(staff.getStf().getStaffid());;
+		FclStaffVo staff=(FclStaffVo)session.getAttribute("stfvo");
+		vo.getSer().setStaffid(staff.getStf().getStaffid());;
 		biz.addSerMain(vo);
 		return "ok";
 	}

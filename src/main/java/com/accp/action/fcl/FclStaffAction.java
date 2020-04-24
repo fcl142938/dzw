@@ -33,10 +33,12 @@ public class FclStaffAction {
 	public  Map<String, Object> login(@PathVariable String staffname,@PathVariable String staffpwd,HttpSession session) {
 		FclStaffVo stfvo=biz.login(staffname,staffpwd);
 		Map<String, Object> map= new HashMap<String, Object>();
-		if(stfvo!=null) {
+		if(stfvo!=null&&stfvo.getStf().getState()==0) {
 			session.setAttribute("stfvo", stfvo);
 			map.put("state", 200);
 			map.put("staff", stfvo);
+		}else if(stfvo!=null&&stfvo.getStf().getState()==1){
+			map.put("state", 300);
 		}else {
 			map.put("state", 400);
 		}

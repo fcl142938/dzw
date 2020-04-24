@@ -39,7 +39,7 @@ public class LxArtificergrowBiz {
 	 * @return
 	 */
 	public List<Artificergrow> queryBanzuList(){
-		return bzdao.selectList(null);
+		return bzdao.selectList(new QueryWrapper<Artificergrow>().eq("state",0));
 	}
 	/**
 	 * 新增班组表信息

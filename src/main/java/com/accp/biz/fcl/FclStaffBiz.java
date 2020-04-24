@@ -43,7 +43,7 @@ public class FclStaffBiz {
 		FclStaffVo svo= new FclStaffVo();
 		//账户 密码 状态  确实账户信息
 		QueryWrapper<Staff> qw=Wrappers.query();
-		svo.setStf(dao.selectOne(qw.eq("staffaccount", staffname).eq("staffpwd",staffpwd ).eq("state", 0)));
+		svo.setStf(dao.selectOne(qw.eq("staffaccount", staffname).eq("staffpwd",staffpwd )));
 		if(svo.getStf()!=null) {
 			QueryWrapper<Collocationpower> qw1=Wrappers.query();
 			//查询中间表	重新组织成一个list集合

@@ -24,12 +24,12 @@ public class LxArtificergradeBiz {
 	 * 查询所有技工星级
 	 * @return
 	 */
-	public PageInfo<Artificergrade> queryStarAll(Integer n,Integer s){
-		PageHelper.startPage(n,s);
-		List<Artificergrade> list = xjjgdao.selectList(null);
-		PageInfo<Artificergrade> pageInfo=new PageInfo<Artificergrade>(list);
-		System.out.println(pageInfo);
-		return pageInfo;
+	public List<Artificergrade> queryStarAll(){
+	//	PageHelper.startPage(n,s);
+		return xjjgdao.selectList(null);
+	//	PageInfo<Artificergrade> pageInfo=new PageInfo<Artificergrade>(list);
+		//System.out.println(pageInfo);
+	//	return pageInfo;
 	}
 	/**
 	 * 添加星级

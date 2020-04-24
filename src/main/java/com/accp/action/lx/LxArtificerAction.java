@@ -1,5 +1,6 @@
 package com.accp.action.lx;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,6 +61,7 @@ public class LxArtificerAction {
 	 */
 	@PostMapping("addbanzu")
 	public Map<String, Object> addbanzujg(@RequestBody Artificer bz) {
+		bz.setStartime(new Date());
 		int count=biz.addBanzu(bz);
 		Map<String, Object> message = new HashMap<String, Object>();
 		if(count!=0) {

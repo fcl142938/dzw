@@ -15,13 +15,13 @@ public class Memberinfo {
     
     private Date medate;
 
-    private Long makeintegral;
+    private Double makeintegral;
 
-    private Long countintegral;
+    private Double countintegral;
 
-    private Long countmoney;
+    private Double countmoney;
 
-    private Long makemoney;
+    private Double makemoney;
 
     private Integer state;
     
@@ -60,35 +60,35 @@ public class Memberinfo {
         this.medate = medate;
     }
 
-    public Long getMakeintegral() {
+    public Double getMakeintegral() {
         return makeintegral;
     }
 
-    public void setMakeintegral(Long makeintegral) {
+    public void setMakeintegral(Double makeintegral) {
         this.makeintegral = makeintegral;
     }
 
-    public Long getCountintegral() {
+    public Double getCountintegral() {
         return countintegral;
     }
 
-    public void setCountintegral(Long countintegral) {
+    public void setCountintegral(Double countintegral) {
         this.countintegral = countintegral;
     }
 
-    public Long getCountmoney() {
+    public Double getCountmoney() {
         return countmoney;
     }
 
-    public void setCountmoney(Long countmoney) {
+    public void setCountmoney(Double countmoney) {
         this.countmoney = countmoney;
     }
 
-    public Long getMakemoney() {
+    public Double getMakemoney() {
         return makemoney;
     }
 
-    public void setMakemoney(Long makemoney) {
+    public void setMakemoney(Double makemoney) {
         this.makemoney = makemoney;
     }
 
@@ -99,4 +99,21 @@ public class Memberinfo {
     public void setState(Integer state) {
         this.state = state;
     }
+    public Memberinfo() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Memberinfo(Integer memberid, Date medate, Double makeintegral, Double countintegral, Double countmoney,
+			Double makemoney, Integer state, String smid) {
+		super();
+		this.memberid = memberid;
+		this.medate = medate;
+		this.makeintegral = makeintegral;
+		this.countintegral = countintegral;
+		this.countmoney = countmoney;
+		this.makemoney = makemoney;
+		this.state = state;
+		this.smid = smid;
+	}
+    
 }
