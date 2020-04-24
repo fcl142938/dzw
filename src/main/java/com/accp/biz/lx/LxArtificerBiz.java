@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.accp.dao.fcl.FclArtificerDao;
 import com.accp.dao.fcl.FclArtificergradeDao;
@@ -109,5 +110,14 @@ public class LxArtificerBiz {
 		ar1.setGprice(ar1.getGprice()+adao.selectById(bz.getAgid()).getAgprice());;
 		dao.updateById(ar1);
 		return jgdao.updateById(bz);
+	}
+		
+	//删除
+	public  void dejg(Integer aid) {
+		Artificer a=fdao.selectById(aid);
+		Artificergrow ar=dao.selectById(a.getGid());
+		ar.setGprice(ar.getGprice()-adao.selectById(a.getAgid()).getAgprice());
+		dao.updateById(ar);
+		fdao.deleteById(aid);
 	}
 }

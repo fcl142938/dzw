@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accp.biz.fcl.FclServicingmainBiz;
+import com.accp.pojo.Sershop;
 import com.accp.pojo.Servicingcourse;
+import com.accp.pojo.Shoppinginfo;
 import com.accp.vo.fcl.FclSerAllVo;
 import com.accp.vo.fcl.FclServicingmainVo;
 import com.accp.vo.fcl.FclShowVo;
@@ -92,5 +94,10 @@ public class FclServicingmainAction {
 	@GetMapping("ajaxUp")
 	public  String ajaxUp() {
 		return biz.ajaxUp();
+	}
+	
+	@GetMapping("qureyShop/{currentPage}/{pageSize}")
+	public  PageInfo<Shoppinginfo> qureyShop(@PathVariable Integer currentPage,@PathVariable Integer pageSize){
+		return biz.qureyShop(currentPage, pageSize);
 	}
 }

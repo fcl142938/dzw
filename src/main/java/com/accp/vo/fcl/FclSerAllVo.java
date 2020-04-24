@@ -41,13 +41,14 @@ public class FclSerAllVo {
 	public FclSerAllVo() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public FclSerAllVo(List<Rescuecar> rlist, List<Artificergrow> alist, List<Consumercar> clist) {
 		super();
 		this.rlist = rlist;
 		this.alist = alist;
 		this.clist = clist;
 	}
+	
 	
 	
 	

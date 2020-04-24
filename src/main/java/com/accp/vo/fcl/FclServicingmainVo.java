@@ -3,6 +3,7 @@ package com.accp.vo.fcl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.accp.pojo.Sershop;
 import com.accp.pojo.Servicingcourse;
 import com.accp.pojo.Servicinginfo;
 import com.accp.pojo.Servicingmain;
@@ -23,7 +24,19 @@ public class FclServicingmainVo {
 	//检验过程
 	private List<Servicingcourse> slist= new ArrayList<Servicingcourse>(0);
 	
+	//项目材料
+	private List<Sershop> shlist= new ArrayList<Sershop>(0);
 	
+	
+	
+
+	public List<Sershop> getShlist() {
+		return shlist;
+	}
+
+	public void setShlist(List<Sershop> shlist) {
+		this.shlist = shlist;
+	}
 
 	public List<Servicingcourse> getSlist() {
 		return slist;

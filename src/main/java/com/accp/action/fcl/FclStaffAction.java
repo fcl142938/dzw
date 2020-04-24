@@ -51,8 +51,12 @@ public class FclStaffAction {
 	 * @return
 	 */
 	@GetMapping("power")
-	public FclStaffVo  getPower(HttpSession session) {
-		return (FclStaffVo)session.getAttribute("stfvo");
+	public Object  getPower(HttpSession session) {
+		FclStaffVo vo=(FclStaffVo)session.getAttribute("stfvo");
+		if(vo!=null) {
+			return vo;
+		}
+		return "no";
 	}
 	
 	/**

@@ -109,4 +109,10 @@ public class LxArtificerAction {
 		}
 		return message;
 	}
+	
+	@GetMapping("dejg/{aid}")
+	public  String dejg(@PathVariable Integer aid) {
+		biz.dejg(aid);
+		return "ok";
+	}
 }

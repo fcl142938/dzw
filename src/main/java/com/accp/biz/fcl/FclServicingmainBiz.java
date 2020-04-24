@@ -11,21 +11,26 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.accp.dao.fcl.FclArtificergrowDao;
 import com.accp.dao.fcl.FclConsumercarDao;
 import com.accp.dao.fcl.FclRescuecarDao;
+import com.accp.dao.fcl.FclSershopDao;
 import com.accp.dao.fcl.FclServicingcourseDao;
 import com.accp.dao.fcl.FclServicinginfoDao;
 import com.accp.dao.fcl.FclServicingmainDao;
+import com.accp.dao.fcl.FclShoppinginfoDao;
 import com.accp.dao.fcl.FclTypeinfoDao;
 import com.accp.pojo.Servicingmain;
+import com.accp.pojo.Shoppinginfo;
 import com.accp.pojo.Typeinfo;
 import com.accp.pojo.Servicingcourse;
 import com.accp.pojo.Artificergrow;
 import com.accp.pojo.Rescuecar;
 import com.accp.pojo.Servicinginfo;
 import com.accp.pojo.Consumercar;
+import com.accp.pojo.Sershop;
 import com.accp.vo.fcl.FclSerAllVo;
 import com.accp.vo.fcl.FclServicingmainVo;
 import com.accp.vo.fcl.FclShowVo;
@@ -58,6 +63,12 @@ public class FclServicingmainBiz {
 
 	@Resource
 	private FclServicingcourseDao scdao;
+	
+	@Resource
+	private FclSershopDao  shdao;
+	
+	@Resource
+	private FclShoppinginfoDao  shinfodao;
 
 	/**
 	 * 条件分页
@@ -97,6 +108,7 @@ public class FclServicingmainBiz {
 			vo.setSer(temp);
 			vo.setList(sdao.selectList(new QueryWrapper<Servicinginfo>().eq("smid", temp.getSmid())));
 			vo.setSlist(scdao.selectList(new QueryWrapper<Servicingcourse>().eq("smid", temp.getSmid())));
+			vo.setShlist(shdao.selectList( new QueryWrapper<Sershop>().eq("smid",  temp.getSmid())));
 			listvo.add(vo);
 		});
 		PageInfo<FclServicingmainVo> pagetInfo = new PageInfo<FclServicingmainVo>(listvo);
@@ -135,6 +147,11 @@ public class FclServicingmainBiz {
 		for (Servicinginfo obj : vo.getList()) {
 			obj.setSmid(smid);
 			sdao.insert(obj);
+		}
+		
+		for (Sershop obj : vo.getShlist()) {
+			obj.setSmid(smid);
+			shdao.insert(obj);
 		}
 		vo.getSer().setPrice(vo.getSer().getCountprice());
 		dao.insert(vo.getSer());
@@ -294,6 +311,11 @@ public class FclServicingmainBiz {
 			}
 		}	
 		return message;
+	}
+	
+	public  PageInfo<Shoppinginfo> qureyShop( Integer currentPage, Integer pageSize){
+		PageHelper.startPage(currentPage, pageSize);
+		return new PageInfo<Shoppinginfo>(shinfodao.selectList(null));
 	}
 
 }

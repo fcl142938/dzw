@@ -23,7 +23,7 @@
 	<!-- 新增岗位 -->
 	<insert id="tyhinsertByPosition">
 		insert into Position
-		Value(#{p.positionid},#{p.departmentid},#{p.positionname})
+		Value(0,#{p.departmentid},#{p.positionname})
 	</insert>
 
 	<!-- 根据岗位ID查询岗位ID是否存在  -->
