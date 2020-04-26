@@ -53,11 +53,14 @@ public class PxAction {
 	//员工资料新增
 	 @PostMapping("addsta")
 	public Map<String, String> addstaff(@RequestBody Staff sta) {
-		 
-		  pbiz.addstaff(sta);
 		 Map<String, String> message = new HashMap<String, String>();
-		 message.put("code", "200");
-		 message.put("msg", "ok");
+		 if(pbiz.addstaff(sta)==0) {
+			 message.put("code", "400");
+			 message.put("msg", "no");
+		 }else {
+			 message.put("code", "200");
+			 message.put("msg", "ok");
+		 } 
 		 return message;
 	}
 	    //根据员工id查询员工信息

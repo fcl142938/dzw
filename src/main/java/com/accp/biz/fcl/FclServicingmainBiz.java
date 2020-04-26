@@ -152,6 +152,10 @@ public class FclServicingmainBiz {
 		for (Sershop obj : vo.getShlist()) {
 			obj.setSmid(smid);
 			shdao.insert(obj);
+			//减少商品表数量
+			Shoppinginfo info=shinfodao.selectById(obj.getShid());
+			info.setSlnumber(info.getSlnumber()-obj.getNumber());;
+			shinfodao.updateById(info);
 		}
 		vo.getSer().setPrice(vo.getSer().getCountprice());
 		dao.insert(vo.getSer());
@@ -271,6 +275,14 @@ public class FclServicingmainBiz {
 				obj.setCourseid(number);
 				sdao.insert(obj);	
 			}	
+		}
+		//材料
+		for (Sershop obj : vo.getShlist()) {
+			obj.setSmid(ser.getSmid());
+			shdao.insert(obj);
+			Shoppinginfo info=shinfodao.selectById(obj.getShid());
+			info.setSlnumber(info.getSlnumber()-obj.getNumber());;
+			shinfodao.updateById(info);
 		}
 		dao.updateById(ser);
 	}

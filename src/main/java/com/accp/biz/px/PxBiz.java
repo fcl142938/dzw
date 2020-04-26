@@ -19,6 +19,7 @@ import com.accp.pojo.Position;
 import com.accp.pojo.Staff;
 import com.accp.vo.px.PX;
 import com.accp.vo.px.Pxdep;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
@@ -50,6 +51,10 @@ public class PxBiz {
 	//员工新增
 	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, readOnly = false)
 	public int addstaff(Staff sta) {
+		List<Staff> list=sdao.selectList(new QueryWrapper<Staff>().eq("staffaccount", sta.getStaffaccount()));
+			if(list!=null&&list.size()!=0) {
+				return 0;
+			}
 		 return sdao.insert(sta);
 	}
 	//员工职位查询
